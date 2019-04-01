@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+body {
+	text-align: center;
+	color: #5D5D5D;
+	margin:0 auto;
+	background-color:#EFEFEF;
+	padding:0;
+	font-family: Verdana, Arial, "ヒラギノ角ゴ Pro W3", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+#out {
+    margin:0 auto 10px auto;
+    text-align: left;
+    width:950px;
+    border-right: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    background-color:#FFFFFF;
+}
+
+#head {
+    letter-spacing: 0.1em;
+    text-align: left;
+    margin:0px auto 20px auto;
+    padding:30px;
+    border-bottom: 1px solid #cccccc;
+}
+
+#main {
+    letter-spacing: 0.1em;
+    font-size: 110%;
+    margin:0 3em;
+    line-height: 1.9;
+}
+
+
+
+
+h1 {
+    font-size: 160%;
+    font-weight:normal;
+    margin:0 0 5px 0;
+    padding:0;
+}
+
+h2 {
+    font-size: 100%;
+    font-weight:normal;
+    margin:0;
+    padding:0;
+
+}
+
+h3 {
+    font-size: 130%;
+    font-weight:normal;
+    margin:2.5em 0 1em 0;
+    padding:0 0 0 10px;
+    border-left: 3px solid #cccccc;
+}
+
+h4 {
+    font-size: 130%;
+    font-weight:normal;
+    margin:2.5em 0 1em 0;
+    padding:0 0 5px 10px;
+    border-bottom: 1px solid #cccccc;
+}
+
+#footer {
+	margin: 3em 0 0 0;
+	padding: 2em 0;
+	border-top: 1px solid #cccccc;
+	line-height: 1.9;
+	text-align: center;
+	letter-spacing: 0.1em;
+}
+
+
