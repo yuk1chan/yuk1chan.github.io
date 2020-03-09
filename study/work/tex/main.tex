@@ -1,0 +1,23 @@
+\documentclass[dvipdfmx,a4paper,16pt]{jsarticle}
+
+\input{MyEnv.tex}
+
+\title{}
+\author{ゆきちゃん}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\bibliographystyle{jplain}    % スタイル(bstファイル名)を記述する．jplain,plainはpLaTeXに標準で付いている．
+\nocite{*}                 % 本文中で参照していない文献をリストに載せたい場合に用いる．*を指定すると全て載せる．通常使わないのでコメントアウトしている．
+\bibliography{ref}    % bibファイル名を指定する．拡張子は除く．
+
+\section{hogehoge}
+
+
+
+\end{document}

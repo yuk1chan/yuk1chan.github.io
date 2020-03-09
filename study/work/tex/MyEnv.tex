@@ -1,0 +1,65 @@
+% 余白の設定
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.2in}
+\setlength{\topmargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+
+% パッケージ
+\usepackage[dvipdfmx]{hyperref,graphicx}		% 画像
+\hypersetup{
+	colorlinks=true, % リンクに色をつけない設定
+	bookmarks=true, % 以下ブックマークに関する設定
+	bookmarksnumbered=true,
+	pdfborder={0 0 0},
+	bookmarkstype=toc
+}
+
+\usepackage{ascmac}
+\usepackage{amsmath, amssymb}		% ギリシャ文字 % 数式色々
+\usepackage{bm}				% 数式　\bm{a} aベクトル
+\usepackage{comment}			% コメント
+\usepackage{siunitx}			% SI単位
+\usepackage{framed}			% 枠組み
+\usepackage{braket}     % ブラケット記法
+\usepackage[square,sort,comma,numbers]{natbib}
+
+
+\newenvironment{Theorem}{\begin{screen}\begin{theorem}}{\end{theorem}\end{screen}}
+\newenvironment{Prop}{\begin{screen}\begin{prop}}{\end{prop}\end{screen}}
+\newenvironment{Lemma}{\begin{screen}\begin{lemma}}{\end{lemma}\end{screen}}
+\newenvironment{Corr}{\begin{screen}\begin{corr}}{\end{corr}\end{screen}}
+\newenvironment{Reidai}{\begin{screen}\begin{reidai}}{\end{reidai}\end{screen}}
+\newenvironment{Def}{\begin{shadebox}\begin{DEF}}{\end{DEF}\end{shadebox}}
+
+\newtheorem{prop}{性質}
+\newtheorem{lemma}{補題}
+\newtheorem{corr}{系}
+\newtheorem{theorem}{定理}
+\newtheorem{DEF}{定義}
+\newtheorem{remark}{注意}
+\newtheorem{reidai}{{例題}}
+
+\newcommand{\nequiv}{\equiv\hspace{-3mm}/\; }
+\newcommand{\proof}{\noindent 証明:\ }
+\newcommand{\sol}{\noindent 解:\ }
+\newcommand{\qed}{\qquad $\blacksquare$}
+
+\begin{comment}
+　複数行に渡るコメントの書き方
+　\usepackage{comment}が必要。
+\end{comment}
+
+% section前に改ページ
+\makeatletter
+\def\section{\newpage\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus -.2ex}{2.3 ex plus .2ex}{\Large\bf}}
+\makeatother
+
+% 数式番号をいい感じに
+\makeatletter
+% \renewcommand{\theequation}{\arabic{chapter}-\arabic{section}-\arabic{equation}}
+	\renewcommand{\theequation}{\arabic{section}-\arabic{equation}}
+  \@addtoreset{equation}{section}
+\makeatother
