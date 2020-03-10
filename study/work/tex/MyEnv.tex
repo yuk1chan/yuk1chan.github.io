@@ -19,6 +19,8 @@
 
 \usepackage{ascmac}
 \usepackage{amsmath, amssymb}		% ギリシャ文字 % 数式色々
+% \usepackage{amsfonts} % \mathbb{A}
+\usepackage{mathtools}
 \usepackage{bm}				% 数式　\bm{a} aベクトル
 \usepackage{comment}			% コメント
 \usepackage{siunitx}			% SI単位
@@ -33,6 +35,8 @@
 \newenvironment{Corr}{\begin{screen}\begin{corr}}{\end{corr}\end{screen}}
 \newenvironment{Reidai}{\begin{screen}\begin{reidai}}{\end{reidai}\end{screen}}
 \newenvironment{Def}{\begin{shadebox}\begin{DEF}}{\end{DEF}\end{shadebox}}
+\newenvironment{Prob}{\begin{screen}\begin{mondai}}{\end{mondai}\end{screen}}
+\newenvironment{Memo}{\begin{boxnote}\begin{memo}}{\end{memo}\end{boxnote}}
 
 \newtheorem{prop}{性質}
 \newtheorem{lemma}{補題}
@@ -41,11 +45,23 @@
 \newtheorem{DEF}{定義}
 \newtheorem{remark}{注意}
 \newtheorem{reidai}{{例題}}
+\newtheorem{mondai}{{問題}}
+\newtheorem{memo}{{メモ}}
 
 \newcommand{\nequiv}{\equiv\hspace{-3mm}/\; }
 \newcommand{\proof}{\noindent 証明:\ }
 \newcommand{\sol}{\noindent 解:\ }
 \newcommand{\qed}{\qquad $\blacksquare$}
+
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\norm}[1]{\|#1\|}
+
+\newcommand{\BF}[1]{{\bf#1}}
+
+
 
 \begin{comment}
 　複数行に渡るコメントの書き方
