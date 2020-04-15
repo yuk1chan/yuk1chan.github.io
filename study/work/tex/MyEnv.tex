@@ -17,6 +17,7 @@
 	bookmarkstype=toc
 }
 
+\usepackage{tikz}
 \usepackage{ascmac}
 \usepackage{amsmath, amssymb}		% ギリシャ文字 % 数式色々
 % \usepackage{amsfonts} % \mathbb{A}
@@ -28,16 +29,21 @@
 \usepackage{braket}     % ブラケット記法
 \usepackage[square,sort,comma,numbers]{natbib}
 
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{angles,quotes}
 
+\newenvironment{Axiom}{\begin{screen}\begin{axiom}}{\end{axiom}\end{screen}}
 \newenvironment{Theorem}{\begin{screen}\begin{theorem}}{\end{theorem}\end{screen}}
 \newenvironment{Prop}{\begin{screen}\begin{prop}}{\end{prop}\end{screen}}
 \newenvironment{Lemma}{\begin{screen}\begin{lemma}}{\end{lemma}\end{screen}}
 \newenvironment{Corr}{\begin{screen}\begin{corr}}{\end{corr}\end{screen}}
 \newenvironment{Reidai}{\begin{screen}\begin{reidai}}{\end{reidai}\end{screen}}
 \newenvironment{Def}{\begin{shadebox}\begin{DEF}}{\end{DEF}\end{shadebox}}
-\newenvironment{Prob}{\begin{screen}\begin{mondai}}{\end{mondai}\end{screen}}
+\newenvironment{Mondai}{\begin{screen}\begin{mondai}}{\end{mondai}\end{screen}}
+\newenvironment{Meidai}{\begin{screen}\begin{meidai}}{\end{meidai}\end{screen}}
 \newenvironment{Memo}{\begin{boxnote}\begin{memo}}{\end{memo}\end{boxnote}}
 
+\newtheorem{axiom}{公理}
 \newtheorem{prop}{性質}
 \newtheorem{lemma}{補題}
 \newtheorem{corr}{系}
@@ -46,6 +52,7 @@
 \newtheorem{remark}{注意}
 \newtheorem{reidai}{{例題}}
 \newtheorem{mondai}{{問題}}
+\newtheorem{meidai}{{命題}}
 \newtheorem{memo}{{メモ}}
 
 \newcommand{\nequiv}{\equiv\hspace{-3mm}/\; }
@@ -54,10 +61,24 @@
 \newcommand{\qed}{\qquad $\blacksquare$}
 
 \newcommand{\K}{\mathbb{K}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}} % 実数体
+\newcommand{\C}{\mathbb{C}} % 複素数体
+\newcommand{\I}{\mathbb{I}} % 単位演算子
+
 
 \newcommand{\norm}[1]{\|#1\|}
+\newcommand{\Dom}[1]{\text{Dom}\,#1}
+\newcommand{\Ran}[1]{\text{Ran}\,#1}
+\newcommand{\Ker}[1]{\text{Ker}\,#1}
+\newcommand{\rank}[1]{\text{rank}\,#1}
+\newcommand{\Tr}[1]{\text{Tr}\,(#1)} % トレース
+\newcommand{\spn}{\text{span}} % span
+\newcommand{\SU}{\text{SU}} % 特殊ユニタリ群
+% \newcommand{\Pr}{\text{Pr}} % 確率 % already exists
+\newcommand{\E}{\text{E}} % 期待値
+\newcommand{\V}{\text{V}} % 分散
+
+% \newcommand{\det}[1]{\text{det}\,#1}
 
 \newcommand{\BF}[1]{{\bf#1}}
 
