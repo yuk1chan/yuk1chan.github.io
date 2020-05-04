@@ -263,7 +263,7 @@
 \begin{equation}
   P(\theta) =
   \begin{bmatrix}
-    e^{-i\theta/2} & 0 \\
+    e^{i\theta/2} & 0 \\
     0              & e^{i\theta/2}
   \end{bmatrix}
 \end{equation}
@@ -403,3 +403,61 @@ $R_zR_yR_z$と回転行列を使って分解しているので、ZYZ分解と呼
 \end{align}
 が得られる。
 よって、パラメータ$\theta,\alpha,\beta,\gamma$を決定することができた。
+
+ここで、$\theta = 0$の場合、$U$は特殊ユニタリ演算子である。
+
+\subsubsection{Controlゲートの分解}
+\cite{barenco1995elementary}を参考に考えていく。
+\begin{Theorem} \label{theorem:AXBXC}
+任意の特殊ユニタリ行列$W\in \SU(2)$について、
+\begin{equation}
+  A \cdot B \cdot C = I
+\end{equation}
+\begin{equation}
+  A \cdot X \cdot B \cdot X \cdot C = W
+\end{equation}
+となる特殊ユニタリ行列$A,B,C\in \SU(2)$が存在する。
+\end{Theorem}
+\proof
+  $W$は特殊ユニタリ行列なので、回転行列を用いることで
+  \begin{equation}
+    W = R_z(\alpha)R_y(\beta)R_z(\gamma)
+  \end{equation}
+  と表すことができる。ただし、$\alpha,\beta,\gamma\in\R$である。
+  \begin{align}
+    A &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right) \\
+    B &= R_y\left(-\frac{\beta}{2}\right)R_z\left(-\frac{\alpha+\gamma}{2}\right) \\
+    C &= R_z\left(\frac{-\alpha+\gamma}{2}\right)
+  \end{align}
+  とすれば、
+  \begin{align}
+    ABC &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right)R_y\left(-\frac{\beta}{2}\right)R_z\left(-\frac{\alpha+\gamma}{2}\right)R_z\left(\frac{-\alpha+\gamma}{2}\right) \\
+    &= R_z(\alpha)R_y(0)R_z(-\alpha) \\
+    &= R_z(\alpha)R_z(-\alpha) \\
+    &= I
+  \end{align}
+  また、$XX = I$を用いて
+  \begin{align}
+    AXBXC &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right)XR_y\left(-\frac{\beta}{2}\right)R_z\left(-\frac{\alpha+\gamma}{2}\right)XR_z\left(\frac{-\alpha+\gamma}{2}\right) \\
+    &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right)XR_y\left(-\frac{\beta}{2}\right)XXR_z\left(-\frac{\alpha+\gamma}{2}\right)XR_z\left(\frac{-\alpha+\gamma}{2}\right) \\
+    &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right)R_y\left(\frac{\beta}{2}\right)R_z\left(\frac{\alpha+\gamma}{2}\right)R_z\left(\frac{-\alpha+\gamma}{2}\right) \\
+    &= R_z(\alpha)R_y(\beta)R_z(\gamma) \\
+    &= W
+  \end{align}
+  となる。
+\qed
+
+\begin{Theorem}
+    任意の特殊ユニタリ行列$W\in\SU(2)$に対し、Control-$W$ゲートは
+    \begin{equation}
+        \Qcircuit @C=1.0em @R=0.7em{
+        \lstick{} & \ctrl{2} & \qw &&&   &&&& \qw       & \ctrl{2} & \qw      & \ctrl{2} & \qw      & \rstick{} \qw \\
+        \lstick{} &          &     &&& = &&&&           &          &          &          &          & \rstick{}     \\
+        \lstick{} & \gate{W} & \qw &&&   &&&&  \gate{A} & \gate{X} & \gate{B} & \gate{X} & \gate{C} & \rstick{} \qw \\
+       }
+    \end{equation}
+    と、特殊ユニタリゲート$A,B,C\in\SU(2)$を使ってシミュレーションできる。
+\end{Theorem}
+\proof
+
+\qed

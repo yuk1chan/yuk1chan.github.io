@@ -27,6 +27,8 @@
 \usepackage{siunitx}			% SI単位
 \usepackage{framed}			% 枠組み
 \usepackage{braket}     % ブラケット記法
+\usepackage{qcircuit} % 量子回路 % qiskitはこれを使っている
+% \usetikzlibrary{quantikz} % qcircuitと衝突
 \usepackage[square,sort,comma,numbers]{natbib}
 
 \usetikzlibrary{arrows.meta}
@@ -82,6 +84,8 @@
 
 \newcommand{\BF}[1]{{\bf#1}}
 
+\renewcommand{\Re}{\text{Re}}
+\renewcommand{\Im}{\text{Im}}
 
 
 \begin{comment}
@@ -100,3 +104,13 @@
 	\renewcommand{\theequation}{\arabic{section}-\arabic{equation}}
   \@addtoreset{equation}{section}
 \makeatother
+
+% 回路のテンプレート
+\begin{comment}
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \ctrl{1} & \rstick{} \qw \\
+		\lstick{} & \gate{X} & \rstick{} \qw \\
+	 }
+\end{equation}
+\end{comment}
