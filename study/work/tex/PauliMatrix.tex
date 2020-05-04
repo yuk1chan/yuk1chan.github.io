@@ -1,0 +1,77 @@
+\section{パウリ行列}
+パウリ行列は、量子力学においてスピン角運動量の記述に用いられる。また、2次特殊ユニタリ群$\SU(2)$の生成元でもあり、リー代数との関係もある。
+そもそもパウリ行列とは、
+\begin{align}
+  \sigma_0 &=
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+  \end{bmatrix},
+  \sigma_1 =
+  \begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+  \end{bmatrix} \\
+  \sigma_2 &=
+  \begin{bmatrix}
+    0 & -i \\
+    i & 0
+  \end{bmatrix},
+  \sigma_3 =
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & -1
+  \end{bmatrix}
+\end{align}
+の、4つの行列のことである。
+
+\subsection{基本的な性質}
+\subsubsection{エルミート性・ユニタリ性}
+\begin{itemize}
+  \item エルミート性
+  $$
+    \sigma_k = \sigma^\dagger,k = 0,1,2,3
+  $$
+  \item ユニタリ性
+  $$
+    \sigma_k^* \sigma_k = \sigma_k\sigma_k^* = E,k = 0,1,2,3
+  $$
+\end{itemize}
+
+\subsubsection{パウリ行列の積}
+\begin{itemize}
+  \item 自乗は単位行列
+  $$
+  \sigma_1^2 = \sigma_2^2 = \sigma_3^2 = E
+  $$
+
+  \item 異なるパウリ行列同士の積
+  $$
+    \sigma_{1} \sigma_{2}=-\sigma_{2} \sigma_{1}=i \sigma_{3},
+    \quad \sigma_{2} \sigma_{3}=-\sigma_{3} \sigma_{2}=i \sigma_{1},
+    \quad \sigma_{3} \sigma_{1}=-\sigma_{1} \sigma_{3}=i \sigma_{2}
+  $$
+\end{itemize}
+
+\subsubsection{パウリ行列のHilbert-Schmidt内積}
+実際に計算すると、
+$$
+  \Tr{\sigma_i,\sigma_j} = 2\delta_{i,j},\quad i,j=0,1,2,3
+$$
+が成り立つ。そのため、パウリ行列は$2\times 2$複素行列空間M$(\C,2)$において、Hilbert-Schmidt内積(定義\ref{Hilbert-Schmidt内積})について直交する。
+M$(\C,2)$は4次元なので、パウリ行列はM$(\C,2)$の直交基底になる。
+
+\subsection{M$(\C,2)$の展開} \label{sec:MC2}
+パウリ行列がM$(\C,2)$の直交基底\footnote{内積はHilbert-Schmidt内積である。}になるということは、
+M$(\C,2)$の任意の元$A$は、$x_j\in\C$は展開係数としてパウリ行列$\sigma_j,j=0,1,2,3$の線型結合で、次のようにかける。
+$$
+  A = \sum_{j=0}^3 x_j\sigma_j
+$$
+ここで、展開係数$x_j$を求める。
+$A$と$\sigma_i,i=0,1,2,3$のHilbert-Schmidt内積を考えると、
+\begin{align}
+  \braket{A|\sigma_i}_{HS} &= \Tr{A^*\sigma_i} \\
+  &= \Tr{\sum_{j=0}^3x_j\sigma_j^*\sigma_i} \\
+  &= 2x_j
+\end{align}
+よって、$x_j = \frac{1}{2}\Tr{A^*\sigma_i}$となる。

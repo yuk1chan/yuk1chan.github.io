@@ -1,0 +1,384 @@
+\section{量子情報理論}
+量子力学において、系の状態は状態ベクトルという単位ベクトルを用いて表現される。
+この状態ベクトルとその定数倍のなすベクトル空間のことを状態空間という。
+状態空間はヒルベルト空間によって定式化される。
+このヒルベルト空間は一般に$L^2$空間を扱うが、これは無限次元である。
+量子コンピューター$\ldots$量子情報科学では有限次元のヒルベルト空間で定式化される。
+
+\subsection{Bornの確率規則}
+Bornの確率規則とは、量子系の物理量の測定したとき、その物理量の値が得られる確率を与える規則のことである。
+ボールの斜方投射を考えてみる。時刻$t_0$でのボールの初速度と投げる方向の角度がわかれば、$t-t_0$秒後のボールの位置、
+速度やボールの持つエネルギーなどの物理量は計算をすることで求めることができる。
+しかし、原子や電子といった物体の位置やエネルギーなどの物理量は求めることはできるが、その値は確率的にしか得られない。
+例えば、$x$という値を$50\%$の確率で、$y$という値を$50\%$の確率で、というように、物理量の値が確率的に得られるのである。
+このBornの確率規則は量子力学の原理である。つまり、数学でいうところの公理のようなものだ。
+\begin{Axiom}
+  量子系は複素ヒルベルト空間$\mathcal{H}$で記述でき、量子状態は$\mathcal{H}$の単位ベクトルで表される。
+  物理量は$\mathcal{H}$上のエルミート演算子$A\in\mathcal{L}(\mathcal{H})$で表されて、測定値はその固有値となる。
+  状態$\ket{\psi}\in\mathcal{H}$の下で、物理量$A$を測定するとき、測定値が$A$の固有値$a\in\R$となる確率$\Pr(A=a | \ket{\psi})$は、
+  $$
+  \Pr(A=a|\ket{\psi}) = \braket{\psi|P_a\psi}
+  $$
+  で与えられる。$P_a$は$A$の固有値$a$に対する固有射影演算子である。
+\end{Axiom}
+
+物理量$A$の固有値に重複がある場合、物理量$A$は縮退しているという。
+$A$の固有値$a$が$\lambda$重に重複している時、対応する固有空間の次元も$\lambda$で、
+直交する$\lambda$個の単位固有ベクトル$\{\ket{\psi_{a,i}}\}_{i=1}^\lambda$を取れ\footnote{$A$はエルミートであるので、あるユニタリ行列で対角化できるため。}、
+固有射影演算子は$P_a$は
+\begin{equation}
+  P_a = \sum_{i=1}^\lambda \ket{\psi_{a,i}}\bra{\psi_{a,i}}
+\end{equation}
+とかける。
+すると、先ほどのBornの確率規則は
+\begin{align}
+  \Pr(A=a|\ket{\psi}) = \braket{\psi|P_a\psi} = \sum_{i=1}^\lambda |\braket{\psi_{a,i}|\psi}|^2
+\end{align}
+ともかける。
+固有値が縮退していないときは$\lambda = 1$である。
+
+\subsection{物理量の期待値}
+物理量の測定値は実数でなので、その期待値や分散を考えることができる。
+期待値を以下のように定義する。
+\begin{Def}
+  状態$\ket{\psi}$の下で物理量$A$を測定した時の測定値の期待値は
+  $$
+    \E_\psi[A] \coloneqq \sum_a a\Pr(A=a | \ket{\psi})
+  $$
+  と定義する。
+\end{Def}
+これに、先ほどのBormの確率規則と、$A$のスペクトル分解を用いることで
+\begin{align}
+  \E_\psi[A] &= \sum_a a\Pr(A=a | \ket{\psi}) = \sum_a a \braket{\psi|P_a\psi} \\
+  &= \Braket{\psi| \left(\sum_a aP_a\right)\psi} = \braket{\psi|A\psi}
+\end{align}
+を得る。
+これが量子力学における期待値の公式である。
+\begin{equation}
+  \E_\psi[A] = \braket{\psi|A\psi}
+\end{equation}
+
+また、同様に分散を定義する。
+\begin{Def}
+  状態$\ket{\psi}$の下で物理量$A$を測定した時の測定値の分散は
+  $$
+    \V_\psi[A] \coloneqq \sum_a (a-\E_\psi[A])^2\Pr(A=a | \ket{\psi})
+  $$
+  と定義する。
+\end{Def}
+これも期待値と同様に計算をすると、
+量子力学における分散の公式が導ける。
+\begin{align}
+  \V_\psi[A] &= \sum_a (a-\E_\psi[A])^2\Pr(A=a | \ket{\psi}) = \sum_a (a-\E_\psi[A])^2\braket{\psi|P_a\psi} \\
+  &= \sum_a (a^2 - 2a\E_\psi[A] + \E_\psi[A]^2)\braket{\psi|P_a\psi} \\
+  &= \sum_a a^2 \braket{\psi|P_a\psi} - \sum_a 2a\E_\psi[A]\braket{\psi|P_a\psi} + \E_\psi[A]^2 \braket{\psi|P_a\psi} \\
+  &= \braket{\psi|A^2\psi} - \E_\psi[A]^2 = \braket{\psi|A^2\psi} - \braket{\psi|A\psi}^2 \\
+  &= \braket{\psi|(A-\E_\psi[A]\I)^2\psi}
+\end{align}
+確率を求めるためにはエルミート演算子$A$の固有値を求める必要があるが、期待値や分散の計算は$A$を直接使って計算できる。
+
+\begin{Memo}
+  \begin{itemize}
+    \item 固有状態
+    \item 不確定性関係
+    について
+  \end{itemize}
+\end{Memo}
+
+\subsection{量子力学の時間発展}
+\begin{Axiom}
+  閉じた量子系はSchr\"{o}dinger方程式にしたがって時間発展する。
+  $$
+  i\hbar\frac{d}{dt}\ket{\psi_t} = H\ket{\psi_t}
+  $$
+  ここで、$\ket{\psi_t}$は時刻$t$の状態、$H$はハミルトニアン演算子、$\hbar$はPlank定数$h$を$2\pi$で割ったもので、Dirac定数である。
+\end{Axiom}
+Plank定数は量子力学に現れる特有の物理定数で、$\hbar\approx 1.054 \times 10^{-34} [J \cdot s]$である。
+これは、量子力学的効果が現れるスケールを決める重要な量である。しかし、マクロな世界ではこの量は無視できるほどに小さいため、
+ボールの位置を確率的にしか予言できない、ということはないのである。
+
+Schr\"{o}dinger方程式
+\begin{equation}
+  i\hbar\frac{d}{dt}\ket{\psi_t} = H\ket{\psi_t}
+\end{equation}
+は形式的に、
+\begin{equation}
+  \ket{\psi_t} = U_t \ket{\psi_0}
+\end{equation}
+と、時間発展演算子$U_t\coloneqq \exp(-iHt/\hbar)$を用いて解くことができる。$U_t$はユニタリ演算子である。
+量子情報科学では任意のユニタリ演算子に対応する時間発展が物理的に可能であることを要請する。
+
+\subsection{合成系}
+\begin{Memo}
+  テンソル積ヒルベルト空間について
+\end{Memo}
+
+\subsection{密度演算子}
+
+\subsection{Blochベクトル}
+
+
+\begin{tikzpicture}
+
+    % Define radius
+    \def\r{3}
+
+    % Bloch vector
+    \draw (0,0) node[circle,fill,inner sep=1] (center) {} -- (\r/3,\r/2) node[circle,fill,inner sep=0.7,label=above:$\vec{a}$] (a) {};
+    \draw[dashed] (center) -- (\r/3,-\r/5) node (phi) {} -- (a);
+
+    % Sphere
+    \draw (center) circle (\r);
+    \draw[dashed] (center) ellipse (\r{} and \r/3);
+
+    % Axes
+    \draw[->] (center) -- ++(-\r/5-0.2,-\r/3-0.2) node[below] (x1) {$x_1$};
+    \draw[->] (center) -- ++(\r+0.5,0) node[right] (x2) {$x_2$};
+    \draw[->] (center) -- ++(0,\r+0.5) node[above] (x3) {$x_3$};
+
+    %Angles
+    \pic [draw=gray,text=gray,->,"$\phi$"] {angle = x1--center--phi};
+    \pic [draw=gray,text=gray,<-,"$\theta$"] {angle = a--center--x3};
+
+\end{tikzpicture}
+
+
+\subsection{量子ビット系}
+古典的なビット(bit)はbinary digitの略で、0と1の二進数である。
+0と1の値を同時に持つことはできないが、簡単に複製を作ることができる。
+一方、量子ビットはキュービット(qubit,qbit)と呼ばれるが、これはquantum bitの略で、bitとの類似性から名付けられたものである。
+
+量子ビット系は、\BF{2次元複素ヒルベルト空間$\C^2$を用いて記述される量子系}である。
+$\C^2$の基底ベクトル$\ket{0},\ket{1} \in \C^2$は
+\begin{align}
+  \ket{0} &=
+  \left(
+    \begin{array}{c}
+      1\\
+      0
+    \end{array}
+  \right) \\
+  \ket{1} &=
+  \left(
+    \begin{array}{c}
+      0\\
+      1
+    \end{array}
+  \right)
+\end{align}
+である。
+古典ビットとの対応を意識するため、古典ビットでの0,1を量子ビットではそれぞれ$\ket{0},\ket{1}$と表す。
+
+任意の元$\ket{\psi}\in\C^2$は$\alpha,\beta\in\C$をスカラーとして、
+\begin{equation}
+  \ket{\psi} = \alpha\ket{0}+\beta\ket{1}
+\end{equation}
+としてかける。ここで、$|\alpha|^2 + |\beta|^2 = 1$という条件があるが、
+量子ビット$\ket{\psi}$は$\ket{0}$と$\ket{1}$の重ね合わせができるということが古典ビットとの大きな違いである。
+つまり、量子ビットは0と1の状態を同時に持つことができる。これは古典ビットではできない。
+
+量子ビット系はヒルベルト空間$\C^2$で記述される量子系であることを思い出すと、
+$\ket{\psi}\in\C^2$は状態ベクトルであって、実際に観測される量ではないのである。
+量子力学ではBornの確率規則で解釈されるように、物理量は確率的にしか得られない。
+つまり、$\ket{\psi} = \alpha\ket{0}+\beta\ket{1}$を測定すると、
+$|\alpha^2|$の確率で$\ket{0}$が、$|\beta^2|$の確率で$\ket{1}$が測定されるのである。
+全確率の和は1であるため、$|\alpha|^2 + |\beta|^2 = 1$という条件が課されるのである。
+
+複数の量子ビット系はテンソル積ヒルベルト空間を用いて表現できる。
+まず、2量子ビット系を考えてみよう。
+2量子ビット系は$\C^2\otimes\C^2$で表される。$\otimes$はテンソル積である。
+$\C^2\otimes\C^2$を$\C^{2\otimes 2},\C^4$ともかく。
+$\C^4$の基底はそれぞれの$\C^2$の基底のテンソル積になる。
+つまり、
+\begin{align} % 00
+  \ket{0}\otimes\ket{0} &=
+  \left(
+    \begin{array}{c}
+      1\\
+      0
+    \end{array}
+  \right)
+  \otimes
+  \left(
+    \begin{array}{c}
+      1\\
+      0
+    \end{array}
+  \right)
+  =
+  \left(
+  \begin{array}{c}
+    1 \cdot \left(
+              \begin{array}{c}
+                1\\
+                0
+              \end{array}
+            \right)\\
+    0 \cdot \left(
+              \begin{array}{c}
+                1\\
+                0
+              \end{array}
+            \right)\\
+    \end{array}
+  \right)
+  =
+  \left(
+    \begin{array}{c}
+      1\\
+      0\\
+      0\\
+      0
+    \end{array}
+  \right)
+\end{align}
+
+\begin{align} % 01
+  \ket{0}\otimes\ket{1} &=
+  \left(
+    \begin{array}{c}
+      1\\
+      0
+    \end{array}
+  \right)
+  \otimes
+  \left(
+    \begin{array}{c}
+      0\\
+      1
+    \end{array}
+  \right)
+  =
+  \left(
+  \begin{array}{c}
+    1 \cdot \left(
+              \begin{array}{c}
+                0\\
+                1
+              \end{array}
+            \right)\\
+    0 \cdot \left(
+              \begin{array}{c}
+                0\\
+                1
+              \end{array}
+            \right)\\
+    \end{array}
+  \right)
+  =
+  \left(
+    \begin{array}{c}
+      0\\
+      1\\
+      0\\
+      0
+    \end{array}
+  \right)
+\end{align}
+
+\begin{align} % 10
+  \ket{1}\otimes\ket{0} &=
+  \left(
+    \begin{array}{c}
+      0\\
+      1
+    \end{array}
+  \right)
+  \otimes
+  \left(
+    \begin{array}{c}
+      1\\
+      0
+    \end{array}
+  \right)
+  =
+  \left(
+  \begin{array}{c}
+    0 \cdot \left(
+              \begin{array}{c}
+                1\\
+                0
+              \end{array}
+            \right)\\
+    1 \cdot \left(
+              \begin{array}{c}
+                1\\
+                0
+              \end{array}
+            \right)\\
+    \end{array}
+  \right)
+  =
+  \left(
+    \begin{array}{c}
+      0\\
+      0\\
+      1\\
+      0
+    \end{array}
+  \right)
+\end{align}
+
+\begin{align} % 11
+  \ket{1}\otimes\ket{1} &=
+  \left(
+    \begin{array}{c}
+      0\\
+      1
+    \end{array}
+  \right)
+  \otimes
+  \left(
+    \begin{array}{c}
+      0\\
+      1
+    \end{array}
+  \right)
+  =
+  \left(
+  \begin{array}{c}
+    0 \cdot \left(
+              \begin{array}{c}
+                0\\
+                1
+              \end{array}
+            \right)\\
+    1 \cdot \left(
+              \begin{array}{c}
+                0\\
+                1
+              \end{array}
+            \right)\\
+    \end{array}
+  \right)
+  =
+  \left(
+    \begin{array}{c}
+      0\\
+      0\\
+      0\\
+      1
+    \end{array}
+  \right)
+\end{align}
+となる。
+$\ket{0}\otimes\ket{0}$を$\ket{00}$とテンソル積を略して表記することもある。
+この表記を用いることで、$\ket{}$の中身が整数の2進数表現と見ることができる。
+つまり、$\ket{00},\ket{01},\ket{10},\ket{11}\in\C^4$をそれぞれ、
+$\ket{0},\ket{1},\ket{2},\ket{3}\in\C^4$と表記することができる。
+n量子ビット系$\C^{2n}$の基底を$\ket{0},\ket{1},\ldots,\ket{2^n-1}$ともかける。
+
+$\C^{2n}$の任意の元$\ket{\psi}$は
+\begin{equation}
+  \ket{\psi} = \sum_{j=0}^{2^n-1} c_j \ket{j}
+\end{equation}
+とかける。ただし、$\sum|c_j|^2 = 1$である。
+もしくは、
+\begin{equation}
+  \ket{\psi} = \sum_{j\in\{0,1\}^n} c_j \ket{j}
+\end{equation}
+と、二進数表現でもかける。どちらが見やすいかはその時々によって変わるため、自分にとって見やすい表現に書き直しながら見ると良い。
+
+量子ビット系を量子ビットとも呼ぶ。また、文脈で古典的なbitと明らかに異なると分かる場合はqbit(qubit)を単にbitと呼ぶこともある。
+混乱の恐れがある場合は、qbit(qubit)と明示的に書く。
+古典ビット(classical bit)をcbitと書くこともある。

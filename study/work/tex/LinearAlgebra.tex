@@ -1,0 +1,716 @@
+\section{線形代数}
+\subsection{ベクトル空間(線形空間)}
+$\K$を$\R$(実数の集合)または$\C$(複素数の集合)とする。
+
+集合$V$に和
+\begin{itemize}
+  \item $\ket{\psi},\ket{\phi} \in V \to \ket{\psi} + \ket{\phi} \in V$
+\end{itemize}
+と、スカラー倍
+\begin{itemize}
+  \item $\ket{\psi} \in V, a \in \K \to a\cdot \ket{\psi} \in V$
+\end{itemize}
+の2つの演算があり、
+$\ket{\psi},\ket{\phi},\ket{\xi} \in V$と$a,b \in \K$について
+\begin{enumerate}
+  \item $\ket{\psi} + \ket{\phi} = \ket{\phi} + \ket{\psi}$ (加法の交換則)
+  \item $\ket{\psi} + (\ket{\phi} + \ket{\xi}) = (\ket{\psi} + \ket{\phi}) + \ket{\xi}$ (加法の結合則)
+  \item $\exists \ket{\theta} \in V, \forall \ket{\alpha} \in V, s.t. \ket{\alpha} + \ket{\theta} = \ket{\alpha}$ (加法の単位元の存在)
+  \item $\forall \ket{\alpha} \in V, \exists \ket{\beta} \in V, s.t \ket{\alpha} + \ket{\beta} = \ket{\alpha}$ (加法の逆元の存在)
+  \item $a\cdot(b \cdot \ket{\psi}) = (ab) \cdot \ket{\psi}$ (結合則)
+  \item $1 \cdot \ket{\psi} = \ket{\psi}$ (乗法の単位元の存在)
+  \item $a \cdot (\ket{\psi} + \ket{\phi}) = a \cdot \ket{\psi} + a \cdot \ket{\phi}$ (分配則1)
+  \item $(a+b) \cdot \ket{\psi} = a \cdot \ket{\psi} + b \cdot \ket{\psi}$ (分配則2)
+\end{enumerate}
+の8つの性質を満たす時、$V$を係数体$\K$上のベクトル空間(線型空間)という。
+
+$V$の元をベクトル、$\K$の元をスカラーと呼ぶ。
+$3$の$\ket{\theta}$を\BF{零ベクトル}と呼び、$\ket{\theta} = 0$とかく\footnote{零ベクトルとスカラーの$0$は文脈によって判断する。}。
+$4$の$\ket{\beta}$を$\ket{\alpha}$の\BF{逆ベクトル}と呼び、$-\ket{\alpha}$とかく。
+
+\begin{Mondai}
+  3における加法の単位元は存在すれば一意に決まる。これを示せ。
+\end{Mondai}
+\sol 2つの単位元$\ket{\theta},\ket{\theta'} \in V$を用意する。
+それぞれは単位元なので、$\ket{\theta} + \ket{\theta'} = \ket{\theta}$および、$\ket{\theta} + \ket{\theta'} = \ket{\theta'}$であるので、
+$\ket{\theta} = \ket{\theta'}$である。
+
+\begin{Mondai}
+  4における加法の逆元は存在すれば一意に決まる。これを示せ。
+\end{Mondai}
+
+\begin{reidai}
+  集合$\K^d = \left\{\left(\begin{array}{c} x_1\\ \vdots \\ x_d \end{array}\right) : x_1, \ldots, x_d \in \K \right\}$に和とスカラー倍を
+  $$
+  \left(\begin{array}{c} x_1\\ \vdots \\ x_d \end{array}\right) + \left(\begin{array}{c} y_1\\ \vdots \\ y_d \end{array}\right)=
+  \left(\begin{array}{c} x_1+ y_1 \\ \vdots \\ x_d + y_d \end{array}\right),
+  a\left(\begin{array}{c} x_1\\ \vdots \\ x_d \end{array}\right) = \left(\begin{array}{c} ax_1\\ \vdots \\ ax_d \end{array}\right)
+  $$
+  によって導入すると、$\K^d$はベクトル空間になる。
+\end{reidai}
+
+\begin{reidai}
+  ある区間上の連続関数$f(x),g(x)$に対して、和とスカラー倍を
+  $$
+  (f+g)(x) = f(x) + g(x), (af)(x) = a\cdot f(x)
+  $$
+  導入すれば、連続関数の集合はベクトル空間になる。
+\end{reidai}
+
+\begin{Def}
+  ベクトル$\ket{\psi} = \left(\begin{array}{c} x_1\\ \vdots \\ x_d \end{array}\right) \in \K^d$を\BF{列ベクトル}と呼ぶ。
+  また、列ベクトルは転置記号$^T$を用いて、$(x_1,\ldots,x_d)^T \coloneqq \left(\begin{array}{c} x_1\\ \vdots \\ x_d \end{array}\right)$
+  と表すこともある。
+\end{Def}
+
+\begin{Def}
+  ベクトル$\ket{\psi} = (z_1,\ldots,z_d)^T \in C^d$に対し、\BF{行ベクトル}$\bra{\psi}$を
+  $$
+    \bra{\psi} \coloneqq (\overline{z_1},\ldots,\overline{z_d})^T
+  $$
+  と、列ベクトルに対して複素共役なベクトルとして定義する。
+\end{Def}
+
+\begin{Def}
+  $V$を$\K$上の線型空間とする。
+  ベクトルの集合$\{\ket{\psi_1},\ldots,\ket{\psi_n}\},(\ket{\psi_i}\in V,(i=1,\ldots,n))$に対して、
+  $$
+    \alpha_1\ket{\psi_1} + \cdots + \alpha_n\ket{\psi_n},~(\alpha_i \in \K,(i=1,\ldots,n))
+  $$
+  を\BF{線型結合}という。
+\end{Def}
+
+\begin{Def}
+  $V$を$\K$上の線型空間とする。
+  ベクトルの集合$\{\ket{\psi_1},\ldots,\ket{\psi_n}\},(\ket{\psi_i}\in V,(i=1,\ldots,n))$に対して、
+  $0\neq\alpha_i \in \K,(i=1,\ldots,n)$が
+  $$
+    \alpha_1\ket{\psi_1} + \cdots + \alpha_n\ket{\psi_n} = 0
+  $$
+  を満たす時、$\{\ket{\psi_1},\ldots,\ket{\psi_n}\}$を\BF{線型従属(一次従属)}といい、
+  満たさない時、$\BF{線型独立(一次独立)}$という。
+\end{Def}
+$\{\ket{\psi_1},\ldots,\ket{\psi_n}\}$が線型独立であれば、
+$$
+\alpha_1\ket{\psi_1} + \cdots + \alpha_n\ket{\psi_n} = 0
+$$
+となるのは、$\alpha_1 = \cdots = \alpha_n = 0$の時である。
+
+\begin{Def}
+  $V$を$\K$上の線型空間とする。
+  $V$の中にある線型独立なベクトルの数が有限である場合、$V$を\BF{有限次元ベクトル空間}であるという。
+  この有限の値を$d$とすると、$V$は\BF{$d$次元ベクトル空間}であるという。また、$V$の次元を$\dim V$とかく。
+  線型独立なベクトルが無限にある場合は\BF{無限次元ベクトル空間}という。
+\end{Def}
+
+\begin{reidai}
+  $1,x,x^2,\ldots$は線型独立である。
+  よって、$\{1,x,x^2,\ldots\}$は無限次元ベクトル空間になる。
+\end{reidai}
+
+\begin{Def}
+  $\{\ket{\psi_1},\ldots,\ket{\psi_n}\}$が\BF{完全}であるとは、任意の$\ket{\phi} \in V$をその線型結合で表すことをいう。
+  つまり、
+  $$
+    \exists \alpha_i \in \K, s.t. \ket{\phi} = \sum_{i=1}^n \alpha_i \ket{\psi_i}
+  $$
+\end{Def}
+
+\begin{Def}
+  完全かつ一次独立な$\{\ket{\psi_1},\ldots,\ket{\psi_n}\}$を$V$の\BF{基底}という。
+\end{Def}
+
+\begin{Mondai}
+  基底による展開係数は一意に定まることを示せ。
+\end{Mondai}
+\sol $\{\ket{\psi_1},\ldots,\ket{\psi_n}\}$を基底として、ベクトル$\ket{\phi}$が
+$\ket{\phi} = \sum_{i=1}^n \alpha_i \ket{\psi_i}$と$\ket{\phi} = \sum_{i=1}^n \alpha'_i \ket{\psi_i}$のように、異なる係数によって展開されているとする。
+ここで差を考えると、$\ket{\phi} - \ket{\phi} = \sum_{i=1}^n (\alpha_i - \alpha'_i) \ket{\psi_i} = 0$となる。
+$\ket{\psi}$は基底なので、$\ket{\psi} \neq 0$であるため、$\alpha_i - \alpha'_i = 0$となるしかない。
+よって、$\alpha_i = \alpha'_i$となるので、展開係数は一意に定まる。
+
+\begin{Theorem}(基底の補充定理)
+  $n<d$個の任意の一次独立なベクトル$\{\ket{\psi_i}\}_{i=1}^n$に対し、適切に$d-n$個の一次独立なベクトルを補充することで、
+  $d$次元ベクトル空間の基底にすることができる。
+\end{Theorem}
+
+$\ket{e_1}\coloneqq (1,0,\ldots,0)^T,\ket{e_2}\coloneqq (0,1,0,\ldots,0)^T,\cdots,\ket{e_d}\coloneqq (0,\ldots,0,1)^T$とすると、
+$\{\ket{e_i}\}_{i=1}^d$は$\K^d$の基底となる。これを\BF{標準基底}という。これにより、$\K^d$の次元は$d$である。
+
+\begin{Def}
+  $2$つのベクトル空間$V_1,V_2$間に、全単射$f:V_1 \to V_2$が存在し、線型構造を保つ、
+  つまり、$f(\ket{\psi} + \ket{\phi}) = f(\ket{\psi} + \ket{\phi}), f(a\ket{\psi}) = af(\ket{\psi})$
+  を満たす時、\BF{同型}という。
+\end{Def}
+
+\begin{Mondai}
+  $\K$上の任意の$d$次元ベクトル空間$V_1,V_2$は同型である。これを示せ。
+\end{Mondai}
+
+任意の$d$次元ベクトル空間$V$は$\K^d$と同型である。$\K^d$の標準基底を用いると、写像$f:V\to\K^d$は
+$f(\sum_i \alpha_i\ket{\psi_i})\coloneqq(\alpha_1,\ldots,\alpha_d)^T$となる。
+このように、$V$の元を$\K^d$の元を使って表すことを、列ベクトルによる\BF{表現}という。
+
+
+\begin{Def}
+  ベクトル$\ket{\psi} = (a_1,\ldots,a_d)^T, \ket{\phi} = (b_1,\ldots,b_d)^T \in \C^d$に対し、
+  $$
+    \ket{\psi}\bra{\phi} =
+    \left(\begin{array}{c} a_1\\ \vdots \\ a_d \end{array}\right)(\overline{b_1},\ldots,\overline{b_d}) =
+    \begin{bmatrix}
+    a_1\overline{b_1} & \cdots & a_1\overline{b_d} \\
+    \vdots & \vdots & \vdots \\
+    a_d\overline{b_1} & \cdots & a_d\overline{b_d} \\
+    \end{bmatrix}
+  $$
+  と列ベクトルと行ベクトルの積を定義する。
+  列ベクトルが$d\times 1$行列、行ベクトルが$1\times d$行列と考えることができるので、その積は$d\times d$行列になる。
+\end{Def}
+
+\begin{Memo}
+  線型空間の部分空間について(spanなど)
+\end{Memo}
+
+\subsection{計量線形空間}
+線型空間に\BF{内積}というものを導入する。
+\begin{Def}
+  ベクトル$\ket{\psi} = (a_1,\ldots,a_d)^T, \ket{\phi} = (b_1,\ldots,b_d)^T \in \C^d$に対し、内積$\braket{\psi|\phi}$を
+  $$
+  \braket{\psi|\phi} = \sum_{i=1}^d \overline{a_i}b_i \in \C
+  $$
+  で定義する。
+\end{Def}
+
+内積が定義されている線型空間を\BF{計量線型空間}という。
+内積の性質について紹介する。
+\begin{Prop}
+  任意のベクトル$\ket{\psi},\ket{\phi},\ket{\xi} \in V$とスカラー$a,b\in\K$について、
+  \begin{enumerate}
+    \item $\braket{\psi|\psi} \geq 0$
+
+    等号成立条件は$\ket{\psi} = 0$の時に限る。
+
+    \item $\overline{\braket{\psi|\phi}} = \braket{\phi|\psi}$ (対称性)
+
+    \item $\braket{\psi|a\phi + b\xi} = a\braket{\psi|\xi} + b\braket{\phi|\xi}$ (線型性)
+  \end{enumerate}
+\end{Prop}
+
+\begin{Def}
+  2つのベクトル$\ket{\psi},\ket{\phi} \in V$の内積が0、つまり、
+  $$
+  \braket{\psi|\phi} = 0
+  $$
+  となる時、この2つのベクトルは\BF{直交}しているという。
+\end{Def}
+
+
+内積の性質を用いることで、ベクトル$\ket{\psi} = (a_1,\ldots,a_d)^T$の大きさ(距離)を定義することができる。
+\begin{Def}
+  ベクトル$\ket{\psi} = (a_1,\ldots,a_d)^T \in V$の大きさ$\norm{\psi}$を
+  $$
+  \norm{\psi} \coloneqq \sqrt{\braket{\psi|\psi}} = \sqrt{\sum_i|a_i|^2}
+  $$
+  で定義する。
+\end{Def}
+ノルムの性質について紹介する。
+\begin{Prop}
+  任意のベクトル$\ket{\psi},\ket{\phi}\in V$とスカラー$a\in K$について、
+  \begin{enumerate}
+    \item $\norm{\psi} \geq 0$
+    \item $\norm{\psi} = 0 \Leftrightarrow \ket{\psi} = 0$
+    \item $\norm{a\psi} = a\norm{\psi}$
+    \item $\norm{\psi + \phi} \leq \norm{\psi} + \norm{\phi}$
+  \end{enumerate}
+\end{Prop}
+
+計量線型空間は内積空間とも呼ばれる。また、内積からノルムを自然に定義できるので、内積空間はノルム空間でもある。
+内積によって誘導されるノルムに関して完備な空間を\BF{ヒルベルト空間}といい、完備ではない内積空間は\BF{前ヒルベルト空間}という。
+また、単にノルム完備な空間を\BF{バナッハ空間}をという。ヒルベルト空間はバナッハ空間でもある。
+
+ノルムが$1$ではないベクトルを\BF{単位ベクトル}と呼ぶ。
+\begin{Def}
+  零ベクトルではない任意のベクトル$\ket{\psi} \in V$に対し、
+  $$
+  \ket{\tilde{\psi}} \coloneqq \frac{\ket{\psi}}{\norm{\psi}}
+  $$
+  と、自分自身を自身のノルムで割ることで向きが同じ単位ベクトルを作ることができる。
+  この操作を\BF{規格化(正規化)}という。
+\end{Def}
+
+\begin{Def}
+  互いに直交する単位ベクトルの集合$\{\ket{\psi_1},\ldots,\ket{\psi_d}\}$を\BF{正規直交系}という。
+  クロネッカーのデルタ\footnote{$\delta_{ii} \coloneqq 1, \delta_{ij} \coloneqq ~0(i\neq j)$}を用いることで、$\braket{\psi_i|\psi_j} = \delta_{ij}$と表すことができる。
+\end{Def}
+
+正規直交系は一次独立である。実際に、$0 = \sum_{i=1}^d a_i \ket{\psi_i}$の両辺に左から$\ket{\psi_j},(j=1,\ldots,d)$の内積を考えると、
+$\braket{\psi_i|\psi_j}=\delta_{ij}$より、$0 = \sum_{i=1}^d a_i \braket{\psi_j|\psi_i} = a_j$となる。
+よって、$d$次元内積空間において$d$個の正規直交系は基底となる。これを\BF{正規直交基底}または\BF{完全正規直交系}と呼ぶ。
+
+\begin{Memo}
+  Gram-Schmitの直交化法
+\end{Memo}
+
+\begin{Theorem} ピタゴラスの定理
+  互いに直交するベクトル$\ket{\psi},\ket{\phi}$に対し、
+  $$
+  \norm{\psi + \phi}^2 = \norm{\psi}^2 + \norm{\phi}^2
+  $$
+  が成立する。
+\end{Theorem}
+\proof 直交するということと、内積の線型性を使えばよい。
+
+\begin{Theorem} Schwarzの不等式
+  内積空間の任意のベクトル$\ket{\psi},\ket{\phi}$に対し、
+  $$
+  |\braket{\psi|\phi}| \leq \norm{\psi}\norm{\phi}
+  $$
+  が成立する。等号成立条件は$\{\ket{\psi},\ket{\phi}\}$が一次従属のとき、またその時に限る。
+\end{Theorem}
+
+ベクトルの列$\ket{\psi_1},\ldots,\ket{\psi_n},\ldots$は、$n,m\to\infty$のとき$\norm{\psi_n - \psi_m}\to 0$を満たす時、\BF{Cauchy列}と呼ばる。
+あるベクトル$\ket{\psi}\in V$が存在して、$n\to\infty$のとき$\norm{\psi-\psi_n}\to 0$をみたすとき、\BF{収束列}と呼ばれる。
+任意のCauchy列が収束列となる内積空間を\BF{完備}といい、完備な内積空間を\BF{ヒルベルト空間}と呼ぶ。
+\begin{reidai}
+  $\K$上の有限次元内積空間は実数(複素数)の完備性によって自動的に完備になる。
+\end{reidai}
+有限次元の場合、内積空間とヒルベルト空間を同一視することができる。
+
+\begin{Memo}
+  ヒルベルト空間の部分空間について(直和空間など)
+\end{Memo}
+
+\begin{Meidai}
+  任意の$d$次元ヒルベルト空間$\mathcal{H}_1と\mathcal{H}_2$は同型である。
+\end{Meidai}
+
+\begin{Meidai}
+  任意の$d$次元ヒルベルト空間はユークリッド空間$\K^d$に同型である。
+\end{Meidai}
+同型写像$f:\mathcal{H}\to\K^d$を、$\mathcal{H}$の正規直交基底$\{\ket{\psi_i}\}_{i=1^d},\K^d$の標準基底を用いて定義することによって、
+ベクトル$\ket{\psi}\in\mathcal{H}$の列ベクトルによる表現は、
+$$
+  (\braket{\psi_1|\psi},\braket{\psi_2|\psi},\ldots,\braket{\psi_d|\psi})^T \in \K^d
+$$
+となる。これは、$\ket{\psi} = a_1\ket{\psi_1} + a_2\ket{\psi_2} + \cdots + a_d\ket{\psi_d}$と正規直交基底で展開した時の展開係数を並べていることと同じである。
+
+
+
+\subsection{線形演算子}
+$V_1,V_2$を$d_1,d_2$次元ベクトル空間、$\mathcal{H},\mathcal{K}$を$d_1,d_2$次元ヒルベルト空間とする。
+
+\begin{Def}
+  写像$A:V_1\to V_2$が\BF{線型性}
+  $$
+    A(a\ket{\psi} + b\ket{\phi}) = aA\ket{\psi} + bA\ket{\phi}, (\forall \ket{\psi},\ket{\phi}\in \mathcal{H},a,b \in \K)
+  $$
+  を満たす時、$A$を\BF{線型演算子}という。
+\end{Def}
+
+任意のベクトル$\ket{\psi}\in V_1$を$V_2$の零ベクトルに移す写像(零演算子$0$)や、任意の$\ket{\psi}$を自身$\ket{\psi}$に移す写像(恒等演算子、単位演算子$\mathbb{I}$)は線型演算子である。
+
+以下、$A,B,C,\ldots$を線型演算子とする。また、$V_1$から$V_2$への写像の集合を$\mathcal{L}(V_1,V2)$をかき、$V_1 = V_2$の場合は単に$\mathcal{V}_1$とかく。
+$A$の\BF{値域(range)}を$\Ran{A}\coloneqq\{A\ket{\psi}\in V_2 : \ket{\psi}\in V_1 \}$、$A\in \mathcal{L}(V_1,V_2)$によって零ベクトルに移されるベクトルの集合を
+$A$の\BF{核(karnel)}といい、$\Ker{A}\coloneqq\{ \ket{\psi} \in V_1 : A\ket{\psi} = 0 \}$とかく。$\Ker{A}$と$\Ran{A}$はそれぞれ$V_1$と$V_2$の部分集合である。
+また、$\Ran{A}$の次元のことを\BF{ランク(rank)}といい、$\rank{A}$とかく。
+
+\begin{reidai}
+  $d_2$行$d_1$列の複素行列$A = [a_{ij}]$は、
+  $$
+  y_i = \sum_{j=1}^{d_1} a_{ij}x_j~~(\forall i = 1,\ldots,d_2)
+  $$
+  の演算にしたがって、$\mathcal{H}=\C^{d_1}$から$\mathcal{K}=\C^{d_2}$への線型演算子になる。
+\end{reidai}
+
+\begin{reidai}
+  例えば、$2$行$3$列の行列を使って考えてみると、
+  $$
+  \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23}
+  \end{bmatrix}
+  \left(
+  \begin{array}{c}
+    x_1\\
+    x_2 \\
+    x_3
+  \end{array}
+  \right)
+    =
+  \left(\begin{array}{c}
+    a_{11}x_1 + a_{12}x_2 + a_{13}x_3\\
+    a_{21}x_1 + a_{22}x_2 + a_{23}x_3
+  \end{array}\right)
+  $$
+  となり、$\C^3$から$\C^2$への写像になっていることがわかる。
+\end{reidai}
+
+\begin{Memo}
+  任意の線型演算子$A\in \mathcal{L}(V_1,V_2)$は行列で表現することができることについて。
+\end{Memo}
+
+ヒルベルト空間上の$2$つの線型演算子の比較について、以下の性質が使われる。
+\begin{Prop}
+  \begin{enumerate}
+    \item $A,B\in\mathcal{L}(\mathcal{H},\mathcal{L})$に対して、
+
+    $$
+      A=B \Leftrightarrow \braket{\psi|A\phi} = \braket{\psi|B\phi}~~(\forall \ket{\psi}\in \mathcal{H},\ket{\phi}\in\mathcal{L})
+    $$
+
+    \item $A\in\mathcal{L}(\mathcal{H})$に対して、
+
+    $$
+      A=B \Leftrightarrow \braket{\psi|A\psi} = \braket{\psi|B\psi}~~(\forall \ket{\psi}\in \mathcal{H})
+    $$
+  \end{enumerate}
+\end{Prop}
+
+
+\begin{Def}
+  線型演算子に対し、和とスカラー倍を以下のように定義する。
+
+  $$
+    A+B \in \mathcal{L}(V_1,V_2) \overset{\mathrm{def}}{\Leftrightarrow} (A+B)\ket{\psi} \coloneqq A\ket{\psi} + B\ket{\psi}~~(\forall \ket{\psi} \in V_1)
+  $$
+
+  $$
+    aA\in \mathcal{L} \overset{\mathrm{def}}{\Leftrightarrow} (aA)\ket{\phi} \coloneqq a(A\ket{\psi})~~(\forall \ket{\psi} \in V)
+  $$
+\end{Def}
+
+\begin{Def}
+  また、$V_1 = V_2 \coloneqq V$のとき、演算子の積を以下のように定義する。
+
+  $$
+    AB \in \mathcal{L}(V) \overset{\mathrm{def}}{\Leftrightarrow} (AB)\ket{\psi} \coloneqq A(B\ket{\psi})~~(\forall \ket{\psi} \in V)
+  $$
+\end{Def}
+
+\begin{Meidai}
+  任意の$A\in\mathcal{L}(\mathcal{H},\mathcal{K})$に対し、
+  $$
+    \braket{\phi|A\psi} = \braket{B\phi|\psi}~~(\forall \psi\in\mathcal{H},\phi\in\mathcal{K})
+  $$
+  を満たす線型演算子$B\in\mathcal{L}(\mathcal{K},\mathcal{H})$が一意に存在する。
+
+  これによって存在する演算子$B$を$A$の随伴演算子といい、$B=A^\dagger$とかく。つまり、
+
+  $$
+    \braket{\phi|A\psi} = \braket{A^\dagger\phi|\psi}~~(\forall \psi\in\mathcal{H},\phi\in\mathcal{K})
+  $$
+\end{Meidai}
+$A$の表現行列を$[a_{ij}]$とすると、$A^\dagger$の表現行列は共役転値$[\overline{a_{ij}}]$となる。
+
+\begin{Prop} 任意の$A,B\in\mathcal{L}(\mathcal{H},\mathcal{K}),a,b\in\C$に対し、
+  \begin{enumerate}
+    \item $(A^\dagger)^\dagger = A$
+    \item $(A+B)^\dagger = A^\dagger + B^\dagger$
+    \item $(aA)^\dagger = \overline{a}A^\dagger$
+    \item $\mathcal{H} = \mathcal{K}$のとき、$(AB)^\dagger = B^\dagger A^\dagger$
+  \end{enumerate}
+
+\end{Prop}
+
+\begin{Mondai}
+  上記の性質を証明せよ。
+\end{Mondai}
+
+\subsection{線型演算子の固有値と固有ベクトル}
+線型演算子の固有値と固有ベクトルはとても重要である。
+
+\begin{Def}
+  $\mathcal{H} = \mathcal{K}$、$\mathcal{H}$の次元を$d$とする。$A\in\mathcal{L}(\mathcal{H})$が
+  $a\in\C$と$0\neq\ket{\psi}\in\mathcal{H}$に対して、
+  $$
+  A\ket{\psi} = a\ket{\psi}
+  $$
+  を満たす時、$a$を$A$の\BF{固有値}という。
+  また、この時の$\ket{\psi}$を固有値$a$に対する\BF{固有ベクトル}という。
+\end{Def}
+
+ある線型演算子の固有値と固有ベクトルを求める問題のことを\BF{固有値問題}という。
+
+ここで、$A$は$d \times d$の行列であることに注意したい。
+というのも、$A$が$m \times n,m\neq n$の行列だとすると、
+$Ax$を計算するためには、$x\in\K^n$であるが、$Ax\in\K^m$である。
+そのため、$Ax$の次元と$\lambda x$の次元が異なるため、固有値を考えることができない。
+
+\begin{Def}
+  $$
+    E_a \coloneqq \{ \ket{\psi} \in \mathcal{H} : A\ket{\psi} = a\ket{\psi} \} =
+  $$
+  を固有値$a$の\BF{固有空間}という。
+  また、
+  $$
+    \{ \ket{\psi} \in \mathcal{H} : A\ket{\psi} = a\ket{\psi} \} = \{ \ket{\psi} \in \mathcal{H} : (A-aE)\ket{\psi} = 0 \} = \Ker(A-aE)
+  $$
+  なので、
+  $$
+    E_a \coloneqq \Ker(A-aE)
+  $$
+    と見ると、カーネルとの関係がわかりやすい。
+\end{Def}
+固有空間は$\mathcal{H}$の部分空間である。
+
+
+固有値の求め方を説明する。
+線型演算子$A\in\mathcal{H}$の未知の固有値を$x$、固有ベクトルを$\ket{\psi}$、単位行列を$E$とする。
+定義より、
+\begin{align}
+  A\ket{\psi} &= x\ket{\psi} \\
+  A\ket{\psi} &= xE\ket{\psi} \\
+  (A-xE)\ket{\psi} &= 0 \label{A-xE}
+\end{align}
+ここで、$\ket{\psi} \neq 0$であるので、式(\ref{A-xE})を満たすためには、行列$A-xE$は逆行列を持ってはいけない。
+$A-xE$が逆行列$B$を持つと仮定すると、$B$を両辺に左から作用させることで$\ket{\psi} = 0$を導くことになり、これは固有ベクトルの条件$\ket{\psi} \neq 0$に矛盾してしまう。
+さて、$A-xE$が逆行列を持たないということは、その行列式が$0$となることである。
+\begin{equation}
+  \det{(A-xE)} = 0
+\end{equation}
+これを\BF{固有方程式}という。
+固有多項式は$d$次多項式であるので、任意の線型演算子は少なくとも$1$つは固有値を持つことになり、重複を含めると最大で$d$個の固有値がある。
+ここで、線型演算子$A$の固有値の集合を$\sigma(A)$とかく。
+
+次に固有ベクトルを求める方法を説明する。固有方程式を解くことで固有値を求めた。線型演算子$A$の固有値の$1$つを$a$とする。
+すると、
+\begin{equation}
+  (A-aE)\ket{\psi} = 0 \label{A-aE}
+\end{equation}
+を満たす。$A = [a_ij]$と行列で表現し、$\ket{\psi} = (p_1,\ldots,p_d)$と固有ベクトルを$\K^d$で表現すれば、
+式(\ref{A-xE})は連立方程式に他ならない。
+あとは、この連立方程式を解くことで$\ket{\psi}$をいくつかのベクトルの線型結合で表すことができる。
+このベクトルが固有ベクトルである。
+また、固有ベクトル$\ket{\psi}$が先に求まれば直接$A\ket{\psi}$を計算することで、対応する固有値を求めることができる。
+
+
+
+\subsection{いくつかの重要な線型演算子}
+\begin{Def}
+  $U\in\mathcal{L}(\mathcal{H},\mathcal{K})$が$UU^\dagger = E, U^\dagger U = E$を満たすとき、
+  つまり、$U^{-1} = U^\dagger$を満たすとき\footnote{$\mathcal{H}=\mathcal{K}$}、$U \in \mathcal{L}(\mathcal{H})$を\BF{ユニタリ演算子}という。
+\end{Def}
+
+$2$つの演算子$A,B\in\mathcal{L}(\mathcal{H},\mathcal{K})$が、$AB=BA$であるとき、\BF{可換}であるという。
+また、$A$と$A^\dagger$が可換であるとき$A$を\BF{正規演算子}とよぶ。
+
+\begin{Prop}
+  $A$を正規演算子とする。
+  \begin{enumerate}
+    \item $a,\ket{\psi}$を$A$の固有値と対応する固有ベクトルとすると、$\overline{a},\ket{\psi}$は$A^\dagger$の固有値と対応する固有ベクトルになる。
+    \item $A$の異なる固有値の固有空間は直交する。
+  \end{enumerate}
+\end{Prop}
+\proof $1$について:
+$A\ket{\psi} = a\ket{\psi}$より、$(A-aE)\ket{\psi} = 0$。ノルムを考えると、
+\begin{align}
+  0 = \norm{(A-aE)\psi}^2
+  &= \braket{(A-aE)\psi | (A-aE)\psi} \\
+  &= \braket{\psi | (A-aE)^\dagger(A-aE)\psi} \\
+  &= \braket{\psi | (A-aE)(A-aE)^\dagger\psi} \footnote{$A^\dagger A= AA^\dagger$を用いた。}\\
+  &= \braket{(A-aE)^\dagger \psi | (A-aE)^\dagger  \psi} \\
+  &= \braket{(A^\dagger-\overline{a}E) \psi | (A^\dagger-\overline{a}E) \psi} \\
+  &= \norm{(A^\dagger-\overline{a}E)\psi}^2
+\end{align}
+よって、$(A^\dagger-\overline{a}E)\ket{\psi}$を得ることができる。
+
+\begin{Def}
+  $A=A^\dagger$を満たす$A\in\mathcal{L}(\mathcal{H})$を\BF{エルミート演算子}または\BF{自己共役演算子}とよぶ。
+\end{Def}
+
+ユニタリ演算子もエルミート演算子も正規演算子である。
+
+\begin{Meidai}
+  $A=A^\dagger \Leftrightarrow \braket{\psi|A\psi} \in \R ~ (\forall \ket{\psi}\in\mathcal{H})$
+\end{Meidai}
+
+
+\begin{Def}
+  $A\in\mathcal{L}(\mathcal{H})$が、任意の$\ket{\psi}\in\mathcal{H}$に対し、
+  $\braket{\psi|A\psi}\geq 0$となるとき、
+  $A$を\BF{正値演算子(非負演算子)}といい、$A\geq 0$とかく。
+\end{Def}
+
+正値演算子はエルミート演算子である。
+
+\begin{Def}
+  $\ket{\psi}\in\mathcal{H}$が$\mathcal{H}$の正規直交基底$\{\ket{\psi_i}\}_{i=1}^d$によって展開されているとする。
+  $$
+    \ket{\psi} = \sum_{i=1}^d a_i \ket{\psi_i}~(a_i \in \K)
+  $$
+  ここで、
+  $$
+    P_k\ket{\psi} = a_k \ket{\psi_k} \footnote{固有値問題に似ているが違うことに注意。}
+  $$
+  とベクトルに作用して基底を取り出すような線型演算子$P_k$を\BF{射影演算子}という。
+\end{Def}
+
+\begin{Prop} 射影演算子の性質
+  \begin{enumerate}
+    \item $P_i P_j = 0,(i\neq j)$
+    \item $P_j^2 = P_j$
+    \item $P_1 + \cdots + P_d = E$
+    \item $P_j^\dagger = P_j$
+  \end{enumerate}
+\end{Prop}
+
+$\ket{\psi}$の展開係数$a_1,\ldots,a_d$は$a_1 = \braket{\psi_1|\psi},\ldots,a_d = \braket{\psi_d|\psi}$と正規直交基底$\{\ket{\psi_i}\}_{i=1}^d$との内積を使って求めることができる。
+なので、$\ket{\psi}$は
+$$
+  \ket{\psi} = \sum_{i=1}^d \ket{\psi_i}\braket{\psi_i|\psi} = \sum_{i=1}^d \ket{\psi} \ket{\psi_i}\bra{\psi_i}
+$$
+とかける。なので、
+$$
+  E = \sum_{i=1}^d \ket{\psi_i}\bra{\psi_i}
+$$
+ともかける。
+
+\begin{Def}
+  線型演算子$A$の固有空間$E_a$上への射影演算子を、固有値$a$の\BF{固有射影演算子}という。
+\end{Def}
+
+\begin{Prop}固有射影演算子の性質
+  \begin{enumerate}
+    \item $\sum_{a\in\sigma{(A)}} P_a = E$
+    \item $P_a P_b = \delta_{ab}P_a~(a,b\in\sigma(A))$
+  \end{enumerate}
+\end{Prop}
+
+\subsection{いくつかの分解定理}
+
+\subsubsection{スペクトル分解}
+\begin{Theorem}スペクトル分解定理
+
+  任意の線型演算子$A$は、$A$の固有値の集合を$\sigma(A)$とすると、
+  $$
+  A = \sum_{a\in\sigma{(A)}} aP_a
+  $$
+  と表すことができる。$P_a$は$a$の固有空間への射影演算子である。
+\end{Theorem}
+\proof
+任意の$\ket{\psi}\in\mathcal{H}$に対して、$A\ket{\psi} = \sum_{a\in\sigma{(A)}} aP_a\ket{\psi}$を示せばよい。
+\begin{align}
+  A\ket{\psi}
+  &= AE\ket{\psi} \\
+  &= A\left(\sum_{a\in\sigma{(A)}} P_a\right)\ket{\psi} \\
+  &= \sum_{a\in\sigma{(A)}}A (P_a\ket{\psi})
+\end{align}
+ここで、$P_a$は固有射影演算子なので、$P_a\ket{\psi}\in E_a$である。
+つまり、$A P_a\ket{\psi} = aP_a\ket{\psi}$であるので、
+$A\ket{\psi} = \sum_{a\in\sigma{(A)}}A (P_a\ket{\psi}) = \sum_{a\in\sigma{(A)}} aP_a \ket{\psi}$を得る。
+
+\subsubsection{固有値分解(対角化)}
+\begin{Def}
+  任意の正規演算子$A$は正規直交基底$\{\ket{\psi_i}\}_{i=1^d}$を固有ベクトルの集合として取ることができる。
+  $a_i$を$\ket{\psi_i}$に対応する$A$の固有値とすると、
+  $$
+  A = \sum_{i=1}^d a_i \ket{\psi_i}\bra{\psi_i}
+  $$
+  と表せる。\footnote{正規行列はユニタリ演算子で対角化できると同値}
+\end{Def}
+\proof
+\begin{align}
+  A\ket{\psi_i} &= a_i\ket{\psi_i} \\
+  A\ket{\psi_i}\bra{\psi_i} &= a_i\ket{\psi_i}\bra{\psi_i}
+\end{align}
+ここで、全ての$i$についての和を取ると、
+\begin{align}
+  A\sum_{i=1}^d \ket{\psi_i}\bra{\psi_i} &= \sum_{i=1}^d a_i\ket{\psi_i}\bra{\psi_i}
+\end{align}
+$\ket{\psi_i}$は正規直交基底なので、$\sum_{i=1}^d \ket{\psi_i}\bra{\psi_i} = E$より、
+\begin{align}
+  A &= \sum_{i=1}^d a_i\ket{\psi_i}\bra{\psi_i}
+\end{align}
+を得る。
+
+任意の演算子が対角化できるわけではないので注意。
+% 演算子のランクと、演算子の固有値の固有空間の直和のランクが一致する場合に対角化できる。
+
+\subsubsection{ジョルダン分解}
+\begin{Memo}
+  広義固有空間
+\end{Memo}
+
+\subsection{演算子のトレース}
+\begin{Def}
+  $\mathcal{H}$上の線型演算子$A$のトレースを、正規直交基底$\{\ket{\psi_i}\}_{i=1}^d$を用いて
+$$
+  \Tr{A}\coloneqq \sum_{i=1}^d\braket{\psi_i|A\psi_i}
+$$
+と定義する。
+\end{Def}
+トレースは正規直交系の取り方に依存しない。
+
+\begin{Prop} トレースの性質
+
+  $A,B\in \mathcal{L}(\mathcal{H}),a,b\in\C$に対し、
+  \begin{enumerate}
+    \item 線型性
+
+    $\Tr{aA+bB} = a\Tr{A} + b\Tr{B}$
+
+    \item 巡回性
+
+    $\Tr{AB} = \Tr{BA}$
+
+    \item $\overline{\Tr{A}} = \Tr{A^\dagger}$
+  \end{enumerate}
+\end{Prop}
+
+\subsection{Hilbert-Schmidt内積}
+
+線型演算子に内積を定義する。
+
+\begin{Def} \label{Hilbert-Schmidt内積}Hilbert-Schmidt内積
+
+  線型演算子$A,B\in\mathcal{L}(\mathcal{H})$に対し、
+  $$
+  \braket{A|B}_{HS} \coloneqq \Tr{A^\dagger B}
+  $$
+  をHilbert-Schmidt内積という。
+\end{Def}
+これによって、$\mathcal{L}(\mathcal{H})$は$d^2$次元ヒルベルト空間になる。
+また、$\{\ket{\psi_i}_{i=1}^d\}$を$\mathcal{H}$の正規直交基底とすると、$\{\ket{\psi_i}\bra{\psi_j}\}_{i,j=1}^d$は
+$\mathcal{L}(\mathcal{H})$の正規直交基底になる。
+
+\subsection{テンソル積ヒルベルト空間(有限次元)}
+$\mathcal{H}_1,\mathcal{H}_2$を$d_1,d_2$次元複素ヒルベルト空間とする。
+$\mathcal{H}_1,\mathcal{H}_2$のテンソル積ヒルベルト空間$\mathcal{H}_{12}$とは、
+以下の性質を満たすテンソル積$\otimes$
+$$
+  (\ket{\psi},\ket{\phi}) \in \mathcal{H}_1 \times \mathcal{H}_2 \to \ket{\psi} \otimes \ket{\phi} \in \mathcal{H}_{12}
+$$
+が定義されている$d_1 d_2$次元ヒルベルト空間である。
+\begin{Prop}
+  \begin{enumerate}
+    \item 双線型性
+    \begin{align}
+      (a\ket{\psi_1} + b\ket{\psi_2})\otimes \ket{\phi} &= a(\ket{\psi_1}\otimes\ket{\phi}) + b(\ket{\psi_2}\otimes\ket{\phi}) \nonumber\\
+      \ket{\psi} \otimes (a\ket{\phi_1} + b\ket{\phi_2}) &= a(\ket{\psi}\otimes\ket{\phi_1}) + b(\ket{\psi}\otimes\ket{\phi_2}) \nonumber
+    \end{align}
+
+    \item テンソル積の内積
+    \begin{align}
+      \braket{\psi_1\otimes\phi_1 | \psi_2\otimes\phi_2} = \braket{\psi_1 | \psi_2}\braket{\phi_1 | \psi_2}
+    \end{align}
+  \end{enumerate}
+\end{Prop}
+
+$\mathcal{H}_1,\mathcal{H}_2$のテンソル積ヒルベルト空間$\mathcal{H}_{12}$を$\mathcal{H}_{12}\coloneqq\mathcal{H}_1\otimes\mathcal{H}_2$とかく。
+
+\begin{Meidai}
+  $\{\ket{\psi_i}\}_{i=1}^{d_1},\{\ket{\phi_j}\}_{j=1}^{d_2}$を$\mathcal{H}_1,\mathcal{H}_2$の正規直交基底とすると、
+  $\{\ket{\psi_i} \otimes \ket{\phi_j} \}_{i=1}^{d1}\,_{j=1}^{d2}$は$\mathcal{H}_1\otimes\mathcal{H}_2$の正規直交基底である。
+\end{Meidai}
+つまり、$\mathcal{H}_1\otimes\mathcal{H}_2$の基底として、$\mathcal{H}_1,\mathcal{H}_2$の基底のテンソル積を取ることができるので、
+$\mathcal{H}_1\otimes\mathcal{H}_2 = \spn\{\ket{\psi}\otimes\ket{\phi} : \ket{\psi}\in\mathcal{H}_1, \ket{\phi}\in\mathcal{H}_2 \}$
+が成立する。
+
+\begin{Memo}
+  \begin{itemize}
+    \item テンソル積ヒルベルト空間の存在性と一意性について
+    \item 成分表示での計算について
+    \item Schmit分解
+    \item 線型演算子のテンソル積について
+  \end{itemize}
+\end{Memo}

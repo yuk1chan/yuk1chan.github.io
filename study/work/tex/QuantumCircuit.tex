@@ -1,0 +1,405 @@
+\section{量子回路}
+量子コンピューターでは、古典的なビットではなく量子ビット系を使う。
+その量子ビット系における演算の演算子はユニタリ演算子である。
+このユニタリ演算子のことを量子ゲートとも呼ぶ。
+
+ここで、いくつかの量子ゲートと量子回路を紹介する。
+量子回路は左から右へ読む。
+しかし、演算子として作用させるときは左からの作用(合成写像)になるので、数式を回路に、回路を数式にするときなどには注意が必要である。
+
+\subsection{基本的なゲート}
+
+\subsubsection{$I$ゲート}
+  $I$は恒等演算子である。
+
+  \begin{equation}
+    I =
+    \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+  \end{bmatrix}
+  \end{equation}
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+  	 	\lstick{\ket{0}} & \gate{I} & \rstick{\ket{0}} \qw \\
+      \lstick{\ket{1}} & \gate{I} & \rstick{\ket{1}} \qw \\
+  	 }
+  \end{equation}
+
+\subsubsection{$X$ゲート}
+  $X$は状態(bit)を反転させる演算子である。
+  そのため、$NOT$ゲートとも呼ばれる。
+  \begin{equation}
+    X =
+    \begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+  \end{bmatrix}
+  \end{equation}
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+  	 	\lstick{\ket{0}} & \gate{X} & \rstick{\ket{1}} \qw \\
+      \lstick{\ket{1}} & \gate{X} & \rstick{\ket{0}} \qw \\
+  	 }
+  \end{equation}
+
+\subsubsection{$Y$ゲート}
+
+  \begin{equation}
+    Y =
+    \begin{bmatrix}
+    0 & -i \\
+    i & 0
+  \end{bmatrix}
+  \end{equation}
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=0.8em{
+      \lstick{\ket{0}} & \gate{Y} & \rstick{i\ket{1}} \qw \\
+      \lstick{\ket{1}} & \gate{Y} & \rstick{-i\ket{0}} \qw \\
+     }
+  \end{equation}
+
+  実際に、計算してみると、
+  \begin{align} % Y|0>
+    Y\ket{0} =
+    \begin{bmatrix}
+      0 & -i \\
+      i & 0
+    \end{bmatrix}
+    \left(
+      \begin{array}{c}
+        1\\
+        0
+      \end{array}
+    \right)
+    =
+    \left(
+      \begin{array}{c}
+        0\\
+        i
+      \end{array}
+    \right)
+    = i\ket{1}
+  \end{align}
+
+  \begin{align} % Y|1>
+    Y\ket{1} =
+    \begin{bmatrix}
+      0 & -i \\
+      i & 0
+    \end{bmatrix}
+    \left(
+      \begin{array}{c}
+        0\\
+        1
+      \end{array}
+    \right)
+    =
+    \left(
+      \begin{array}{c}
+        -i\\
+        0
+      \end{array}
+    \right)
+    = -i\ket{0}
+  \end{align}
+
+\subsubsection{$Z$ゲート}
+
+  \begin{equation}
+    Z =
+    \begin{bmatrix}
+    1 & 0 \\
+    0 & -1
+  \end{bmatrix}
+  \end{equation}
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+  	 	\lstick{\ket{0}} & \gate{Z} & \rstick{\ket{0}} \qw \\
+      \lstick{\ket{1}} & \gate{Z} & \rstick{-\ket{1}} \qw \\
+  	 }
+  \end{equation}
+
+  演算の結果から分かるように、$Z$の固有値は$\pm1$で、対応する固有ベクトルはそれぞれ$\ket{0},\ket{1}$である。
+  $\ket{0},\ket{1}$を\BF{標準基底}や\BF{$Z$基底}ともいう。
+
+  また、$ZZ = I$でもあることは容易に分かる。
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+  	 	\lstick{\ket{0}} & \gate{Z} & \gate{Z} & \rstick{\ket{0}} \qw \\
+      \lstick{\ket{1}} & \gate{Z} & \gate{Z} & \rstick{\ket{1}} \qw \\
+  	 }
+  \end{equation}
+
+\subsubsection{Hadmardゲート}
+  Hadmardゲートはアダマールゲートと呼ぶ。
+  頭文字をとって$H$ゲートかく。
+
+  \begin{equation}
+    H = \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+      1 & 1 \\
+      1 & -1
+    \end{bmatrix}
+  \end{equation}
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{\ket{0}} & \gate{H} & \rstick{\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})} \qw \\
+      \lstick{\ket{1}} & \gate{H} & \rstick{\frac{1}{\sqrt{2}}(\ket{0}-\ket{1})} \qw \\
+     }
+  \end{equation}
+
+  このように、$H$ゲートを$\ket{0},\ket{1}$に作用することで、$\ket{0}$と$\ket{1}$が均等に混ざり合った状態を作ることができる。
+  また、$HH = I$でもある。
+
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{\ket{0}} & \gate{H} & \gate{H} & \rstick{\ket{0}} \qw \\
+      \lstick{\ket{1}} & \gate{H} & \gate{H} & \rstick{\ket{1}} \qw \\
+     }
+  \end{equation}
+
+\subsubsection{演算順序について}
+  行列積の演算子の順序と、量子回路の演算子の順序が逆になることに注意する。
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+  	 	\lstick{\ket{x}} & \gate{Z} & \gate{X} & \rstick{X(Z\ket{x}) = XZ\ket{x}} \qw \\
+      \lstick{\ket{x}} & \gate{X} & \gate{Z} & \rstick{Z(X\ket{x}) = ZX\ket{x}} \qw \\
+  	 }
+  \end{equation}
+
+  量子回路は左から演算子を順番に作用(合成写像)させていくことを表しているためである。
+
+\subsubsection{$Control$ゲート}
+  ユニタリ演算子$U$
+  \begin{equation}
+    U =
+    \begin{bmatrix}
+      u_{00} & u_{01} \\
+      u_{10} & u_{11}
+    \end{bmatrix}
+  \end{equation}
+  に対して、$Control$-$U(CU)$ゲートというものを考える。
+  \begin{equation}
+    CU =
+    \begin{bmatrix}
+      1 & 0 & 0      & 0 \\
+      0 & 1 & 0      & 0 \\
+      0 & 0 & u_{00} & u_{01} \\
+      0 & 0 & u_{10} & u_{11}
+    \end{bmatrix}
+  \end{equation}
+  実際に計算してみれば分かるが、これは、
+  \begin{align}
+    CU\ket{0y} &= \ket{0y} \\
+    CU\ket{1y} &= \ket{1}\otimes CU\ket{y}
+  \end{align}
+  という計算になる。
+  つまり、1bit目の状態が0なら全体の状態はそのままで、1bit目の状態が1なら2bit目に$U$ゲートが作用される。
+  回路は以下のようになる。
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{q_1 : \ket{x}} & \ctrl{1} & \rstick{} \qw \\
+      \lstick{q_2 : \ket{y}} & \gate{U} & \rstick{} \qw \\
+     }
+  \end{equation}
+  この制御側のビットを制御ビット、制御ビットの状態によって演算が作用されるビットのことをターゲットビットと呼ぶ。
+
+  制御ビットとターゲットビットが逆になることもある。
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{q_1 : \ket{x}} & \gate{U} & \rstick{} \qw \\
+      \lstick{q_2 : \ket{y}} & \ctrl{-1} & \rstick{} \qw \\
+     }
+  \end{equation}
+  この場合の演算子は
+  \begin{equation}
+    \begin{bmatrix}
+      u_{00} & u_{01} & 0 & 0 \\
+      u_{10} & u_{11} & 0 & 0 \\
+      0      & 0      & 1 & 0 \\
+      0      & 0      & 0 & 1
+    \end{bmatrix}
+  \end{equation}
+  となる。
+
+  特に、$U$が$X$ゲートの場合は$CX$ゲート、$CNOT$ゲートや制御$NOT$ゲートと呼ばれ、
+  量子ビットのもつれ状態を作る際に重要になるゲートでもある。
+  \begin{equation}
+    CX =
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 0 & 1 \\
+      0 & 0 & 1 & 0
+    \end{bmatrix}
+  \end{equation}
+  回路では、
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{q_1 : \ket{x}} & \ctrl{1} & \rstick{} \qw \\
+      \lstick{q_2 : \ket{y}} & \gate{X} & \rstick{} \qw \\
+     }
+  \end{equation}
+  や
+  \begin{equation}
+      \Qcircuit @C=1.0em @R=1.0em{
+      \lstick{q_1 : \ket{x}} & \ctrl{1} & \rstick{} \qw \\
+      \lstick{q_2 : \ket{y}} & \targ & \rstick{} \qw \\
+     }
+  \end{equation}
+  で表されることが多い。
+
+  回路の左に$q_1$や$q_2$と書いてあるが、これは何番目の量子ビットなのかを明示的に表したものである。
+
+\subsubsection{位相シフトゲート}
+
+位相シフトゲート$P(\theta)$は
+\begin{equation}
+  P(\theta) =
+  \begin{bmatrix}
+    e^{-i\theta/2} & 0 \\
+    0              & e^{i\theta/2}
+  \end{bmatrix}
+\end{equation}
+である。
+本によっては
+\begin{equation}
+  P(\theta) =
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & e^{i\theta}
+  \end{bmatrix}
+\end{equation}
+を採用しているものもある。
+
+\subsubsection{回転ゲート}
+ブロッホ球上の各軸を中心にブロッホベクトルを回転させるゲートを考えることができる。
+
+$x$軸を中心に回転させるゲート$R_x(\theta)$は
+\begin{align} \label{eq:Rx}
+  R_x(\theta) &=
+  \begin{bmatrix}
+    \cos(\theta/2) & -i\sin(\theta/2) \\
+    -i\sin(\theta/2) & \cos(\theta/2)
+  \end{bmatrix}
+\end{align}
+
+$y$軸を中心に回転させるゲート$R_y(\theta)$は
+\begin{align} \label{eq:Ry}
+  R_y(\theta) &=
+  \begin{bmatrix}
+    \cos(\theta/2) & -\sin(\theta/2) \\
+    \sin(\theta/2) & \cos(\theta/2)
+  \end{bmatrix}
+\end{align}
+
+$z$軸を中心に回転させるゲート$R_z(\theta)$は
+\begin{align} \label{eq:Rz}
+  R_z(\theta) &=
+  \begin{bmatrix}
+    e^{-i\theta/2} & 0 \\
+    0              & e^{i\theta/2}
+  \end{bmatrix}
+\end{align}
+である。
+本によっては、また、場合によっては複素共役転置(conjugate transpose)を取ったものを採用している。
+そのため計算が合わないなどのことがあれば、回転行列の定義を見直すと良いかもしれない。
+
+\subsection{回転ゲートの性質}
+
+
+
+
+
+\subsection{量子ゲートの分解}
+プログラムを書くことでIBMが提供している量子コンピューター上で計算することができる。
+しかし、現在の量子コンピューターで使用できるゲートの種類は限られており、
+1量子ビットを演算するための回転ゲートと、2量子ビットでの演算をするためのCNOTゲートくらいしか使えない。
+3量子ビットを使用するトフォリゲートは使用できないのである。
+しかし、任意のn量子ビット演算子は、いくつかの1量子ビット演算子といくつかのCNOT演算子の組み合わせで近似的に構成することができることが知られており、
+1量子ビット演算子は回転ゲートである。
+そのため、自分で作った量子回路に含まれる演算子を適切に分解することで、量子コンピューター実機でも回路を計算することができるのである。
+
+この演算子の分解は一意には定まらないため様々な分解方法が考案されている。
+闇雲に分解を考えるのではなく、分解後の演算子の数が出来るだけ少なくなるような分解を考えたい。
+それは、演算子の数が多くなればそれだけ計算に時間がかかることになり、またハードウェア依存のエラーを含みやすくなってしまうためである。
+また、ハードウェアによって量子ビットがどのように配置されているのか、どの量子ビット同士が繋がっているのかが異なる。
+そのため、物理的に隣り合っていない量子ビット間でCNOTゲートを作用させたいとなると、SWAPゲートを挟んだりする必要があり、
+さらに回路が複雑になってしまう。
+ハードウェアに合わせた最適な演算子の分解を考える必要もあり、非常に難しい問題である。
+同時にとても興味深い問題でもある。
+
+量子回路の分解について説明していく。
+
+\subsubsection{ZYZ分解} \label{sec:ZYZdecomposition}
+任意の1qbitユニタリ演算子$U$は回転行列(\ref{eq:Ry}),(\ref{eq:Rz})
+を使うことで、
+\begin{equation}\label{eq:arbitaryU}
+  U = e^{i\theta}R_z(\alpha)R_y(\beta)R_z(\gamma) =
+  e^{i\theta}
+  \begin{bmatrix}
+    e^{-i(\alpha+\gamma)/2}\cos(\beta/2) & -e^{-i(\alpha-\gamma)/2}\sin(\beta/2)\\
+    e^{i(\alpha-\gamma)/2}\sin(\beta/2)  & e^{i(\alpha+\gamma)/2}\cos(\beta/2)
+\end{bmatrix}
+\end{equation}
+と表すことができる。ただし、$\theta,\alpha,\beta,\gamma\in\R$である。
+$R_zR_yR_z$と回転行列を使って分解しているので、ZYZ分解と呼ばれる。
+また、$R_z$と$R_y$を使うので、ZY分解、YZ分解とも呼ばれる(多分)。
+本によっては回転行列が複素共役転置したものを採用しているので符号が異なる部分があるため、注意が必要である。
+
+パラメーター$\theta,\alpha,\beta,\gamma\in\R$を任意に決めれば好きなユニタリ行列を作ることができる。
+では、逆に、任意のユニタリ行列からパラメーターを決定してみよう。
+任意のユニタリ行列を
+\begin{equation}
+  U =
+  \begin{bmatrix}
+    z_1 & z_2 \\
+    z_3 & z_4
+  \end{bmatrix}
+\end{equation}
+とする。$z_1,z_2,z_3,z_4\in\C$である。
+まずは$\theta$を決定する。これは簡単で、
+\begin{equation}
+  \theta = \arctan\left(\frac{\Im(\det U)}{\Re(\det U)}\right)/2
+\end{equation}
+となる。これは(\ref{eq:arbitaryU})の行列式を考えればすぐにわかる。
+残りのパラメータを決定するために、$U$に$e^{-i\theta}$をかける。すると、
+\begin{equation}
+  SU = e^{-i\theta}U =
+  \begin{bmatrix}
+    a_1 + ia_2 & -(b_1 + ib_2) \\
+    b_1 - ib_2 & a_1 - ia_2
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    r_a e^{i\theta_a} & -r_b e^{i\theta_b} \\
+    r_b e^{-i\theta_b} & r_a e^{-i\theta_a}
+  \end{bmatrix}
+\end{equation}
+となる。$a_1,a_2,b_1,b_2\in\R$で、極座標表示では
+\begin{align}
+  r_a      &= \sqrt{a_1^2 + a_2^2} \\
+  r_b      &= \sqrt{b_1^2 + b_2^2} \\
+  \theta_a &= \arctan\left(\frac{a_2}{a_1}\right) \\
+  \theta_b &= \arctan\left(\frac{b_2}{b_1}\right)
+\end{align}
+となる。
+(\ref{eq:arbitaryU})と比較すれば、
+\begin{align}
+  e^{-i(\alpha+\gamma)/2}\cos(\beta/2) = r_a e^{i\theta_a} \\
+  e^{i(\alpha-\gamma)/2}\sin(\beta/2)  = r_b e^{-i\theta_b}
+\end{align}
+より、
+\begin{align}
+  \alpha &= -\theta_a + \theta_b \\
+  \gamma &= -\theta_a - \theta_b \\
+  \beta  &= 2\arctan\left(\frac{r_b}{r_a}\right)
+\end{align}
+が得られる。
+よって、パラメータ$\theta,\alpha,\beta,\gamma$を決定することができた。
