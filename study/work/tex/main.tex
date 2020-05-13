@@ -1,9 +1,9 @@
-\documentclass[dvipdfmx,a4paper,16pt]{jsarticle}
+\documentclass[dvipdfmx,a4paper,16pt]{jreport}
 
 \input{MyEnv.tex}
 
 \title{忘備録}
-% \author{ゆきちゃん}
+\author{saito}
 \begin{document}
 
 \maketitle
@@ -31,10 +31,18 @@
 \nocite{*}
 \bibliography{ref}
 
-
+% chapter
 \input{LinearAlgebra.tex}
-\input{PauliMatrix.tex}
+\input{PauliMatrix.tex} % section
+
+% chapter
+\input{InformationTheorem.tex}
+
+% chapter
 \input{QuantumInformation.tex}
+
+% chapter
 \input{QuantumCircuit.tex}
+\input{qiskit.tex}
 
 \end{document}

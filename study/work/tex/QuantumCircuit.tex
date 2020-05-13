@@ -1,4 +1,4 @@
-\section{量子回路}
+\chapter{量子回路}
 量子コンピューターでは、古典的なビットではなく量子ビット系を使う。
 その量子ビット系における演算の演算子はユニタリ演算子である。
 このユニタリ演算子のことを量子ゲートとも呼ぶ。
@@ -7,9 +7,9 @@
 量子回路は左から右へ読む。
 しかし、演算子として作用させるときは左からの作用(合成写像)になるので、数式を回路に、回路を数式にするときなどには注意が必要である。
 
-\subsection{基本的なゲート}
+\section{基本的なゲート}
 
-\subsubsection{$I$ゲート}
+\subsection{$I$ゲート}
   $I$は恒等演算子である。
 
   \begin{equation}
@@ -27,7 +27,7 @@
   	 }
   \end{equation}
 
-\subsubsection{$X$ゲート}
+\subsection{$X$ゲート}
   $X$は状態(bit)を反転させる演算子である。
   そのため、$NOT$ゲートとも呼ばれる。
   \begin{equation}
@@ -45,7 +45,7 @@
   	 }
   \end{equation}
 
-\subsubsection{$Y$ゲート}
+\subsection{$Y$ゲート}
 
   \begin{equation}
     Y =
@@ -107,7 +107,7 @@
     = -i\ket{0}
   \end{align}
 
-\subsubsection{$Z$ゲート}
+\subsection{$Z$ゲート}
 
   \begin{equation}
     Z =
@@ -135,7 +135,7 @@
   	 }
   \end{equation}
 
-\subsubsection{Hadmardゲート}
+\subsection{Hadmardゲート}
   Hadmardゲートはアダマールゲートと呼ぶ。
   頭文字をとって$H$ゲートかく。
 
@@ -164,7 +164,7 @@
      }
   \end{equation}
 
-\subsubsection{演算順序について}
+\subsection{演算順序について}
   行列積の演算子の順序と、量子回路の演算子の順序が逆になることに注意する。
   \begin{equation}
       \Qcircuit @C=1.0em @R=1.0em{
@@ -175,7 +175,7 @@
 
   量子回路は左から演算子を順番に作用(合成写像)させていくことを表しているためである。
 
-\subsubsection{$Control$ゲート}
+\subsection{Controlゲート}
   ユニタリ演算子$U$
   \begin{equation}
     U =
@@ -184,7 +184,7 @@
       u_{10} & u_{11}
     \end{bmatrix}
   \end{equation}
-  に対して、$Control$-$U(CU)$ゲートというものを考える。
+  に対して、Control-$U(CU)$ゲートというものを考える。
   \begin{equation}
     CU =
     \begin{bmatrix}
@@ -220,10 +220,10 @@
   この場合の演算子は
   \begin{equation}
     \begin{bmatrix}
-      u_{00} & u_{01} & 0 & 0 \\
-      u_{10} & u_{11} & 0 & 0 \\
-      0      & 0      & 1 & 0 \\
-      0      & 0      & 0 & 1
+      1 & 0      & 0 & 0      \\
+      0 & u_{00} & 0 & u_{01} \\
+      0 & 0      & 1 & 0      \\
+      0 & u_{10} & 0 & u_{11}
     \end{bmatrix}
   \end{equation}
   となる。
@@ -256,8 +256,13 @@
   で表されることが多い。
 
   回路の左に$q_1$や$q_2$と書いてあるが、これは何番目の量子ビットなのかを明示的に表したものである。
+  省略されている場合が多いが、基本的に、一番上が1bit目でその下が2bit目で、
+  \begin{equation}
+    \ket{q_1q_2}
+  \end{equation}
+  である。
 
-\subsubsection{位相シフトゲート}
+\subsection{位相シフトゲート}
 
 位相シフトゲート$P(\theta)$は
 \begin{equation}
@@ -278,7 +283,7 @@
 \end{equation}
 を採用しているものもある。
 
-\subsubsection{回転ゲート}
+\subsection{回転ゲート}
 ブロッホ球上の各軸を中心にブロッホベクトルを回転させるゲートを考えることができる。
 
 $x$軸を中心に回転させるゲート$R_x(\theta)$は
@@ -313,11 +318,12 @@ $z$軸を中心に回転させるゲート$R_z(\theta)$は
 
 \subsection{回転ゲートの性質}
 
+\subsection{位相の見返り}
 
 
 
 
-\subsection{量子ゲートの分解}
+\section{量子ゲートの分解}
 プログラムを書くことでIBMが提供している量子コンピューター上で計算することができる。
 しかし、現在の量子コンピューターで使用できるゲートの種類は限られており、
 1量子ビットを演算するための回転ゲートと、2量子ビットでの演算をするためのCNOTゲートくらいしか使えない。
@@ -336,8 +342,9 @@ $z$軸を中心に回転させるゲート$R_z(\theta)$は
 同時にとても興味深い問題でもある。
 
 量子回路の分解について説明していく。
+ただし、\RED{分解は一意とは限らないことに注意}だ。
 
-\subsubsection{ZYZ分解} \label{sec:ZYZdecomposition}
+\subsection{ZYZ分解} \label{sec:ZYZdecomposition}
 任意の1qbitユニタリ演算子$U$は回転行列(\ref{eq:Ry}),(\ref{eq:Rz})
 を使うことで、
 \begin{equation}\label{eq:arbitaryU}
@@ -406,7 +413,7 @@ $R_zR_yR_z$と回転行列を使って分解しているので、ZYZ分解と呼
 
 ここで、$\theta = 0$の場合、$U$は特殊ユニタリ演算子である。
 
-\subsubsection{Controlゲートの分解}
+\subsection{Controlゲートの分解}
 \cite{barenco1995elementary}を参考に考えていく。
 \begin{Theorem} \label{theorem:AXBXC}
 任意の特殊ユニタリ行列$W\in \SU(2)$について、
@@ -451,13 +458,606 @@ $R_zR_yR_z$と回転行列を使って分解しているので、ZYZ分解と呼
     任意の特殊ユニタリ行列$W\in\SU(2)$に対し、Control-$W$ゲートは
     \begin{equation}
         \Qcircuit @C=1.0em @R=0.7em{
-        \lstick{} & \ctrl{2} & \qw &&&   &&&& \qw       & \ctrl{2} & \qw      & \ctrl{2} & \qw      & \rstick{} \qw \\
-        \lstick{} &          &     &&& = &&&&           &          &          &          &          & \rstick{}     \\
-        \lstick{} & \gate{W} & \qw &&&   &&&&  \gate{A} & \gate{X} & \gate{B} & \gate{X} & \gate{C} & \rstick{} \qw \\
+        \lstick{} & \ctrl{2} & \qw &&&   &&&& \qw      & \ctrl{2} & \qw      & \ctrl{2} & \qw      & \rstick{} \qw \\
+        \lstick{} &          &     &&& = &&&&          &          &          &          &          & \rstick{}     \\
+        \lstick{} & \gate{W} & \qw &&&   &&&& \gate{A} & \gate{X} & \gate{B} & \gate{X} & \gate{C} & \rstick{} \qw \\
        }
     \end{equation}
-    と、特殊ユニタリゲート$A,B,C\in\SU(2)$を使ってシミュレーションできる。
+    と、特殊ユニタリゲート$A,B,C\in\SU(2)$を使って計算できる。
 \end{Theorem}
 \proof
+  $W$は特殊ユニタリ行列なので、
+  \begin{equation}
+    W = R_z(\alpha)R_y(\beta)R_z(\gamma)
+  \end{equation}
+  と表せる。ただし、$\alpha,\beta,\gamma\in\R$である。
+  ここで、定理\refeq{theorem:AXBXC}より、
+  \begin{align}
+    A &= R_z(\alpha)R_y\left(\frac{\beta}{2}\right) \\
+    B &= R_y\left(-\frac{\beta}{2}\right)R_z\left(-\frac{\alpha+\gamma}{2}\right) \\
+    C &= R_z\left(\frac{-\alpha+\gamma}{2}\right)
+  \end{align}
+  とする。
 
+  コントロールビットが0の時は$W$ゲートは作用しないので、回路全体としては$I$ゲートにならなければならない。
+  そのため、$ABC = I$となるべきだが、これは定理\refeq{theorem:AXBXC}より、$ABC = I$であるとわかる。
+
+  同様に、コントロールビットが1の時は$W$ゲートが作用するので、$AXBXC = W$とならなければならないが、
+  定理\refeq{theorem:AXBXC}より$AXBXC = W$である。
 \qed
+
+\begin{Theorem}
+  任意の位相ゲート$P(\delta)$に対し、Control-$P$ゲートは
+  \begin{equation}
+    \Qcircuit @C=1.0em @R=0.7em{
+    \lstick{} & \ctrl{2} & \qw &&&&   &&&& \gate{E} & \rstick{} \qw \\
+    \lstick{} &          &     &&&& = &&&&          & \rstick{}     \\
+    \lstick{} & \gate{P} & \qw &&&&   &&&& \qw      & \rstick{} \qw \\
+    }
+  \end{equation}
+  と、ユニタリ行列$E$を使って計算できる。
+\end{Theorem}
+\proof
+  \begin{equation}
+    E = R_z(-\delta)P(\delta/2)
+    = \begin{bmatrix}
+        1 & 0 \\
+        0 & e^{i\theta}
+      \end{bmatrix}
+  \end{equation}
+  とする。
+  一方、Control-$P$ゲートは
+  \begin{equation}
+    \begin{bmatrix}
+      1 & 0 & 0           & 0\\
+      0 & 1 & 0           & 0\\
+      0 & 0 & e^{i\theta} & 0\\
+      0 & 0 & 0           & e^{i\theta}
+    \end{bmatrix}
+  \end{equation}
+  である。
+  実際に、$\ket{00},\ket{01},\ket{10},\ket{11}$にControl-$P$ゲートを作用させてみると
+  \begin{align}
+    \ket{00} &\xrightarrow{\text{Control-}P} \ket{00} \\
+    \ket{01} &\xrightarrow{\text{Control-}P} \ket{01} \\
+    \ket{10} &\xrightarrow{\text{Control-}P} \ket{1}e^{i\theta}\ket{0} = e^{i\theta}\ket{10} \\
+    \ket{11} &\xrightarrow{\text{Control-}P} \ket{1}e^{i\theta}\ket{1} = e^{i\theta}\ket{11}
+  \end{align}
+  となる。
+  また、$E$ゲートの作用を考えると、
+  \begin{align}
+    \ket{0} &\xrightarrow{E} \ket{0} \\
+    \ket{1} &\xrightarrow{E} e^{i\theta}\ket{1}
+  \end{align}
+  である。
+
+  2bit目に作用した際に位相$e^{i\theta}$が出てくるが、1bit目が1のときに位相$e^{i\theta}$が出てくるという位相の見返りが起きているのである。
+  これを利用することで、この2つの回路が同値であるとわかる。
+  \qed
+
+\subsection{QR分解}
+QR分解は$n\times k$行列$A$を$n\times n$ユニタリ行列Qと$n\times k$上三角行列$R$に分解する手法である\cite{golub2012matrix}。
+\begin{equation}
+  A = QR
+\end{equation}
+ただし、$n\geq k$である。このQR分解を用いて、量子ゲートの分解を考える。
+QR分解にはハウスホルダー変換やギブンス回転行列、グラムシュミットの直交化法など、いくつかの方法を用いることができる。
+ここでは、ギブンス回転行列を用いた方法でQR分解を行う。
+それはギブンス回転行列を、いくつかのCNOTゲートと1qbitゲートで表すことができるためである。
+QR分解した後のゲート数を削減するために、(ゲート数を削減するという意味で)改良されたQR分解などが考えられているが、
+まずは基本的なアイデアを追っていくことにしよう。
+
+\subsubsection{$3\times 3$の分解}
+量子ゲートは$2^n\times 2^n$ユニタリ行列であるが、まずは例として$3\times 3$ユニタリ行列で考えてみる。
+\begin{equation}
+  U =
+    \begin{bmatrix}
+      a & d & g \\
+      b & e & h \\
+      c & f & j \\
+    \end{bmatrix}
+\end{equation}
+各成分は複素数である。
+
+まず、$b$をpivotとして$c$の消去を考える。
+\begin{align}
+  u   &= \sqrt{|b|^2 + |c|^2} \\
+  u_1 &= \frac{b^*}{u}\\
+  u_2 &= \frac{c^*}{u}
+\end{align}
+とおいて、
+\begin{equation}
+  U_c =
+  \begin{bmatrix}
+    1 & 0      & 0   \\
+    0 & u_1    & u_2 \\
+    0 & -u_2^* & u_1^*
+  \end{bmatrix}
+\end{equation}
+という行列を考えると、
+\begin{equation}
+  U_c U =
+  \begin{bmatrix}
+    a & d & g \\
+    u & e' & h' \\
+    0 & f' & j'
+  \end{bmatrix}
+\end{equation}
+となり、$c$が消去できた。$b$が$u$になったことに注意しよう。
+$'$がついているものは計算されて値が変わったもので、複素数である。
+
+次に、$a$をpivotとして、$u$の消去を考える。
+\begin{align}
+  u'   &= \sqrt{|a|^2 + |u|^2} \\
+  u_1' &= \frac{a^*}{u'}\\
+  u_2' &= \frac{u^*}{u'}
+\end{align}
+とおいて、
+\begin{equation}
+  U_u =
+  \begin{bmatrix}
+    u_1'    & u_2'   & 0 \\
+    -u_2'^* & u_1'^* & 0 \\
+    0       &        & 1 \\
+  \end{bmatrix}
+\end{equation}
+という行列を考えると、
+\begin{equation}
+  U_u U_a U =
+  \begin{bmatrix}
+    u' & d'  & g'  \\
+    0  & e'' & h'' \\
+    0  & f'  & j'
+  \end{bmatrix}
+\end{equation}
+となり、$u$の消去ができた。
+ここで、
+\begin{align}
+  u' &= \sqrt{|a|^2 + |u|^2} \\
+     &= \sqrt{|a|^2 + |b|^2 + |c|^2} \\
+     &= 1
+\end{align}
+となる。$U$はユニタリ行列なので、列ベクトルのノルムは1であるため。
+また、
+\begin{align}
+  d' &= u_1'd + u_2'e' \\
+     &= \frac{a^*}{u'}d + \frac{u^*}{u'}e' \\
+     &= \frac{a^*}{u'}d + \frac{u^*}{u'}(u_1 e + u_2 f) \\
+     &= \frac{a^*}{u'}d + \frac{u^*}{u'}u_1 e + \frac{u^*}{u'}u_2 f \\
+     &= \frac{a^*}{u'}d + \frac{u^*}{u'}\frac{b^*}{u}e + \frac{u^*}{u'}\frac{c^*}{u}f \\
+     &= a^*d + b^*e + c^*f \\
+     &= 0
+\end{align}
+$u'=1,u^*=u$と、ユニタリ行列なので、異なる列ベクトル同士の内積は$0$になることを使った。
+
+同様に、$g'$について、
+\begin{align}
+  g' &= u_1'g + u_2'h' \\
+     &= \frac{a^*}{u'}g + \frac{u^*}{u'}h' \\
+     &= \frac{a^*}{u'}g + \frac{u^*}{u'}(u_1 h + u_2 j) \\
+     &= \frac{a^*}{u'}g + \frac{u^*}{u'}u_1 h + \frac{u^*}{u'}u_2 j \\
+     &= \frac{a^*}{u'}g + \frac{u^*}{u'}\frac{b^*}{u}h + \frac{u^*}{u'}\frac{c^*}{u}j \\
+     &= a^*g + b^*h + c^*j \\
+     &= 0
+\end{align}
+
+よって、今、
+\begin{align}
+  U_u U_a U =
+  \begin{bmatrix}
+    1 & 0   & 0   \\
+    0 & e'' & h'' \\
+    0 & f'  & j'
+  \end{bmatrix}
+  = U_{f'}^H
+\end{align}
+である。つまり、
+\begin{equation}
+  U = U_a^H U_u^H U_{f'}^H
+\end{equation}
+と、ユニタリ行列$U$をユニタリ行列(ギブンス回転行列)で表すことができた。
+つまり、
+\begin{align}
+  Q &= U_a^H U_u^H U_{f'}^H \\
+  R &= I
+\end{align}
+と見ることで、
+\begin{equation}
+  U = QR
+\end{equation}
+と、QR分解できたことになる。
+
+\subsubsection{$4\times 4$の分解}
+次は2量子ビットのゲート、つまり、$4\times 4$ユニタリ行列で考える。
+任意の$4\times 4$ユニタリ行列を
+\begin{equation}
+  U =
+    \begin{bmatrix}
+      u_{11} & u_{12} & u_{13} & u_{14} \\
+      u_{21} & u_{22} & u_{23} & u_{24} \\
+      u_{31} & u_{32} & u_{33} & u_{34} \\
+      u_{41} & u_{42} & u_{43} & u_{44} \\
+    \end{bmatrix}
+\end{equation}
+とする。すると、
+\begin{equation}
+  U_{21}U_{31}U_{41}U =
+  \begin{bmatrix}
+    1 & 0      & 0      & 0      \\
+    0 & u_{22} & u_{23} & u_{24} \\
+    0 & u_{32} & u_{33} & u_{34} \\
+    0 & u_{42} & u_{43} & u_{44} \\
+  \end{bmatrix}
+\end{equation}
+となるような回転行列$U_{21},U_{31},U_{41}$が存在するので、先ほどの$3\times 3$の分解に帰着できる。
+
+一般に以下の補題が成立する(らしい)。
+\begin{Lemma}\label{lemma:Udecomp}
+  $U$を$d\times d$ユニタリ行列とすると、$N=d(d-1)/2$個のレベル$2$(\text{two-level})ユニタリ行列
+  $U_1,U_2,\ldots,U_N$が存在して、
+  \begin{equation}
+    U = U_1 U_2 \cdots U_N
+  \end{equation}
+  と分解できる。レベル$2$のユニタリ行列はたかだか$2$つの成分の間でのみ作用するようなユニタリ行列のことをいう。
+  つまり、ギブンス回転行列のことでもある。
+  \footnote{\cite{mottonen2005decompositions}の12ページにあるQR分解の章で、"the matrix Q may be a product two-level matrices called Givens rotations."
+  と言っている。}
+\end{Lemma}
+$n$量子ビットの作用する演算子は$2^n \times 2^n$ユニタリ行列である。
+そのため、任意の$n$量子ビットの作用する演算子をレベル$2$ユニタリ行列で分解するためには、
+簡単に見積もっても$2^n(2^n-1)/2$より、$\mathcal{O}(4^n)$個のレベル$2$ユニタリ行列が必要になる。
+このレベル$2$ユニタリ行列を構築するために、基本ゲートがどのくらい必要になるのかがポイントになる。
+
+\subsection{2量子ビットゲートの分解} \label{sec:2qbitdecomp}
+QR分解を用いて分解していくことが基本的なアイデアであることがわかった。
+では、QR分解で使うギブンス回転行列は量子回路ではどういったものになるのか。
+2量子ビットは6種類の回路から構成でき、そのうちの4種類がギブンス回転行列に対応する。
+(\cite{li2013decomposition}が参考になる。)
+1量子ビットゲート
+\begin{equation}
+  V =
+  \begin{bmatrix}
+    v_{11} & v_{12} \\
+    v_{21} & v_{22}
+  \end{bmatrix}
+\end{equation}
+を使って回路を見ていこう。
+
+1種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \gate{V} & \rstick{} \qw \\
+		\lstick{} & \qw      & \rstick{} \qw \\
+	 }
+\end{equation}
+と、1bit目にのみ作用するゲートである。
+行列表現は、
+\begin{equation}
+  (V*) : V\otimes I =
+  \begin{bmatrix}
+    v_{11} & 0      & v_{12} & 0      \\
+    0      & v_{11} & 0      & v_{12} \\
+    v_{21} & 0      & v_{22} & 0      \\
+    0      & v_{21} & 0      & v_{22}
+  \end{bmatrix}
+\end{equation}
+である。
+
+2種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \qw      & \rstick{} \qw \\
+		\lstick{} & \gate{V} & \rstick{} \qw \\
+	 }
+\end{equation}
+と、2bit目にのみ作用するゲートである。
+行列表現は、
+\begin{equation}
+  (*V) : I \otimes V =
+  \begin{bmatrix}
+    v_{11} & v_{12} & 0      & 0 \\
+    v_{21} & v_{22} & 0      & 0 \\
+    0      & 0      & v_{11} & v_{12} \\
+    0      & 0      & v_{21} & v_{22}
+  \end{bmatrix}
+\end{equation}
+である。
+
+3種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \ctrl{1} & \rstick{} \qw \\
+		\lstick{} & \gate{V} & \rstick{} \qw \\
+	 }
+\end{equation}
+と、1bit目が1のときに、2bit目に$V$が作用するControlゲートである。
+行列表現は、
+\begin{equation}
+  (1V) :
+  \begin{bmatrix}
+    1 & 0 & 0      & 0 \\
+    0 & 1 & 0      & 0 \\
+    0 & 0 & v_{11} & v_{12} \\
+    0 & 0 & v_{21} & v_{22}
+  \end{bmatrix}
+\end{equation}
+である。
+
+4種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \ctrlo{1} & \rstick{} \qw \\
+		\lstick{} & \gate{V}  & \rstick{} \qw \\
+	 }
+\end{equation}
+と、1bit目が0のときに、2bit目に$V$が作用するControlゲートである。
+行列表現は、
+\begin{equation}
+  (0V) :
+  \begin{bmatrix}
+    v_{11} & v_{12} & 0 & 0 \\
+    v_{21} & v_{22} & 0 & 0 \\
+    0      & 0      & 0 & 0 \\
+    0      & 0      & 0 & 0
+  \end{bmatrix}
+\end{equation}
+である。
+
+5種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \gate{V}  & \rstick{} \qw \\
+		\lstick{} & \ctrl{-1} & \rstick{} \qw \\
+	 }
+\end{equation}
+と、2bit目が1のときに、1bit目に$V$が作用するControlゲートである。
+行列表現は、
+\begin{equation}
+  (V1) :
+  \begin{bmatrix}
+    1 & 0      & 0 & 0      \\
+    0 & v_{11} & 0 & v_{12} \\
+    0 & 0      & 1 & 0      \\
+    0 & v_{21} & 0 & v_{22}
+  \end{bmatrix}
+\end{equation}
+である。
+
+6種類目は、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \gate{V}   & \rstick{} \qw \\
+		\lstick{} & \ctrlo{-1} & \rstick{} \qw \\
+	 }
+\end{equation}
+と、2bit目が0のときに、1bit目に$V$が作用するControlゲートである。
+行列表現は、
+\begin{equation}
+  (V0) :
+  \begin{bmatrix}
+    v_{11} & 0 & v_{12} & 0 \\
+    0      & 1 & 0      & 0 \\
+    v_{21} & 0 & v_{22} & 0 \\
+    0      & 0 & 0      & 1
+  \end{bmatrix}
+\end{equation}
+である。
+
+$3\sim6$種類目のゲートがギブンス回転行列になっている。
+
+このような、
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \multigate{1}{U} & \rstick{} \qw \\
+		\lstick{} & \ghost{U}        & \rstick{} \qw \\
+	 }
+\end{equation}
+任意の2量子ビットゲートでも、
+QR分解によってギブンス回転行列の積に分解できるため、上記の6種類のゲートの組み合わせで表すことができる。
+
+ここで、例えば、2種類目のゲート
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \ctrlo{1} & \rstick{} \qw \\
+		\lstick{} & \gate{V}  & \rstick{} \qw \\
+	 }
+\end{equation}
+は
+\begin{equation}
+		\Qcircuit @C=1.0em @R=1.0em{
+		\lstick{} & \gate{X} & \ctrl{1} & \gate{X} & \rstick{} \qw \\
+		\lstick{} & \qw      & \gate{V} & \qw      & \rstick{} \qw \\
+	 }
+\end{equation}
+のゲートと等価であることはすぐにわかる。
+そのため、$3\sim6$種類目のゲートは定理\ref{theorem:AXBXC}よってさらに分解できる。
+
+\subsection{一般のControlゲートの分解}
+$n$個の制御ビットを持つControl$U$ゲートも1ビットゲートとCNOTゲートで構成できる。
+まず、$n=2$の時を考えてみる。
+\begin{Theorem} \label{theorem:CCUdecomp}
+  制御ビットが2個の左辺の回路は、右辺の回路に等しい。
+  \begin{equation}
+    \Qcircuit @C=1.0em @R=1.0em{
+    \lstick{} & \ctrl{1} & \qw &&&&   &&&& \qw      & \ctrl{1} & \qw        & \ctrl{1} & \ctrl{2} & \rstick{} \qw \\
+    \lstick{} & \ctrl{1} & \qw &&&& = &&&& \ctrl{1} & \targ    & \ctrl{1}   & \targ    & \qw      & \rstick{} \qw \\
+    \lstick{} & \gate{U} & \qw &&&&   &&&& \gate{V} & \qw      & \gate{V^*} & \qw      & \gate{V} & \rstick{} \qw \\
+    }
+  \end{equation}
+  ただし、$V^2 = Uはユニタリ$である。
+\end{Theorem}
+\proof
+$U$はユニタリなので、$V$もまたユニタリであることに注意する。
+
+第1,2ビットが0のとき、全てのゲートは作用しないので第3ビットは変化しない。
+なので、ゲートは$\ket{00}\bra{00}\otimes I$と作用する。
+
+次に、第1ビットが0で第2ビットが1のときを考える。
+このとき、第3ビットには$V^*V　= I$が作用することになるので、
+ゲートは$\ket{01}\bra{01}\otimes I$と作用する。
+
+同様に、第1ビットが1で第2ビットが0のときは、第3ビットには$VV^* = I$が作用することになるので、
+ゲートは$\ket{10}\bra{10}\otimes I$と作用する。
+
+最後に、第1,2ビットがともに1のときは、第3ビットには$VV = U$が作用するので、
+ゲートは$\ket{11}\bra{11}\otimes U$と作用する。
+
+よって、以上のことから、
+\begin{equation}
+  \ket{00}\bra{00}\otimes I + \ket{01}\bra{01}\otimes I + \ket{10}\bra{10}\otimes I + \ket{11}\bra{11}\otimes U = \text{CC-U}
+\end{equation}
+であり、2つの量子回路は等しい。
+\qed
+
+次に、$n=3$の時を考えてみる。
+\begin{Theorem}
+  制御ビットが3個の左辺の回路は、右辺の回路に等しい。
+  \begin{equation}
+    \Qcircuit @C=1.0em @R=1.0em{
+    \lstick{} & \ctrl{1} & \qw &&&&   &&&& \qw      & \ctrl{1} & \qw        & \ctrl{1} & \ctrl{1} & \rstick{} \qw \\
+    \lstick{} & \ctrl{1} & \qw &&&&   &&&& \qw      & \ctrl{1} & \qw        & \ctrl{1} & \ctrl{2} & \rstick{} \qw \\
+    \lstick{} & \ctrl{1} & \qw &&&& = &&&& \ctrl{1} & \targ    & \ctrl{1}   & \targ    & \qw      & \rstick{} \qw \\
+    \lstick{} & \gate{U} & \qw &&&&   &&&& \gate{V} & \qw      & \gate{V^*} & \qw      & \gate{V} & \rstick{} \qw \\
+    }
+  \end{equation}
+  ただし、$V^2 = U$はユニタリである。
+\end{Theorem}
+\proof
+定理\ref{theorem:CCUdecomp}と同様に考えればよい。
+\qed
+
+一般に、制御ビットが$n$個のときも同様に考えることができる。
+\begin{Theorem}\label{theorem:CNUdecomp}
+  制御ビットがn個の左辺の回路は、右辺の回路に等しい。
+  \begin{equation}
+    \Qcircuit @C=1.0em @R=1.0em{
+    \lstick{} & \ctrl{1} & \qw &&&&   &&&& \qw      & \ctrl{1} & \qw        & \ctrl{1} & \ctrl{1} & \rstick{} \qw \\
+    \lstick{} & \ctrl{2} & \qw &&&&   &&&& \qw      & \ctrl{2} & \qw        & \ctrl{2} & \ctrl{2} & \rstick{} \qw \\
+    \lstick{} & \push{\approx} &&&&&  &&&&& \push{\approx} &   & \push{\approx}  & \push{\approx} & \rstick{} \\
+    \lstick{} & \ctrl{1} & \qw &&&& = &&&& \qw      & \ctrl{1} & \qw        & \ctrl{1} & \ctrl{2} & \rstick{} \qw \\
+    \lstick{} & \ctrl{1} & \qw &&&&   &&&& \ctrl{1} & \targ    & \ctrl{1}   & \targ    & \qw      & \rstick{} \qw \\
+    \lstick{} & \gate{U} & \qw &&&&   &&&& \gate{V} & \qw      & \gate{V^*} & \qw      & \gate{V} & \rstick{} \qw \\
+    }
+  \end{equation}
+  ただし、$V^2 = U$はユニタリである。
+\end{Theorem}
+\proof
+定理\ref{theorem:CCUdecomp}と同様に考えればよい。
+\qed
+
+ここで、定理\ref{theorem:CNUdecomp}の2つの回路を見比べてみる。
+右辺の回路には$n-1$個の制御ビットを使うゲート$V$と$n-2$個の制御ビットを使うXゲートがある。
+実は、\cite{barenco1995elementary}のColorally7.4より、
+$n-2$個の制御ビットを使うXゲートは$8(n-5)$個のトフォリゲートに分解できるらしい(証明は追っていない)。
+つまり、$\mathcal{O}(n)$個のゲートで分解ができる。
+$n-1$個の制御ビットを使うゲート$V$に定理\ref{theorem:CNUdecomp}が適用できるので、
+$n-1$個の制御ビットを使うゲート$V$を計算するために必要はゲートの数を$C_{n-1}$とすると、
+\begin{equation}
+  C_n = C_{n-1} + \mathcal{O}(n)
+\end{equation}
+が成り立つので、
+\begin{equation}
+  C_n = \mathcal{O}(n^2)
+\end{equation}
+とわかる。
+つまり、定理\ref{theorem:CNUdecomp}の左辺の回路は、$\mathcal{O}(n^2)$個のゲートに分解できる。
+
+\subsection{Two-levelユニタリゲート}
+たかだか2つの成分の間でのみ作用するような演算子のことをTwo-levelユニタリゲートという。
+つまり、ギブンス回転行列のことでもある。
+\begin{equation}
+  \tilde{U} =
+  \begin{bmatrix}
+    a & c \\
+    b & d
+  \end{bmatrix}
+\end{equation}
+を用いて、まずは4次のTwo-levelユニタリ行列の構成を考える。
+例えば、
+\begin{equation}
+  U =
+  \begin{bmatrix}
+    a & 0 & 0 & c \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    b & 0 & 0 & d
+  \end{bmatrix}
+\end{equation}
+という行列は$\ket{00}$と$\ket{11}$にのみ作用する回転行列であるが、
+\ref{sec:2qbitdecomp}節ではこの$U$は登場しない。
+それは、$U$は\ref{sec:2qbitdecomp}節に登場するゲートで構築できるためである。
+実際に構築してみよう。
+
+まず、この$U$は$\ket{00}$と$\ket{11}$にのみ$\tilde{U}$が作用するということがポイントである。
+ここで、$00$から$11$になるようなグレイコードの列を考える。
+隣り合うグレイコードはそのハミング距離が1であることに注意すると、
+\begin{equation}
+  00 \to 01 \to 11
+\end{equation}
+という列になる。この列を考えるときは、$00 \to 10 \to 11$も考えることができるが、グレイコードの順序を考慮して列を作ることがポイントである。
+このグレイコードの列を回路で実現することを考える。
+$00 \to 01$の変換を回路で考えると
+\begin{equation}
+  \Qcircuit @C=1.0em @R=1.0em{
+  \lstick{} & \ctrlo{1} & \rstick{} \qw \\
+  \lstick{} & \targ     & \rstick{} \qw \\
+ }
+\end{equation}
+である。
+次に、$01 \to 11$の変換を考えるが、これは考える必要がなく、$\tilde{U}$の作用を考えれば良い。
+作用は以下の回路のようになる。
+\begin{equation}
+  \Qcircuit @C=1.0em @R=1.0em{
+  \lstick{} & \ctrlo{1} & \gate{\tilde{U}} & \rstick{} \qw \\
+  \lstick{} & \targ     & \ctrl{-1}        & \rstick{} \qw \\
+ }
+\end{equation}
+最後に、$00 \to 01$の変換を戻すように、
+\begin{equation}
+  \Qcircuit @C=1.0em @R=1.0em{
+  \lstick{} & \ctrlo{1} & \gate{\tilde{U}} & \ctrlo{1} & \rstick{} \qw \\
+  \lstick{} & \targ     & \ctrl{-1}        & \targ     & \rstick{} \qw \\
+ }
+\end{equation}
+とすれば、$U$を量子回路で実現できたことになる。
+
+もう一つ例として、3量子ビットで以下の行列を考える。先ほどの$U$と似ている。
+\begin{equation}
+  U' =
+  \begin{bmatrix}
+    a &   &   &   &   &   &   & c \\
+      & 1 &   &   &   &   &   &   \\
+      &   & 1 &   &   &   &   &   \\
+      &   &   & 1 &   &   &   &   \\
+      &   &   &   & 1 &   &   &   \\
+      &   &   &   &   & 1 &   &   \\
+      &   &   &   &   &   & 1 &   \\
+    b &   &   &   &   &   &   & d \\
+  \end{bmatrix}
+\end{equation}
+$\ket{000}$と$\ket{111}$にのみ$\tilde{U}$が作用することが分かる。
+先ほどと同様に、$000$から$111$へのグレイコードの列
+\begin{equation}
+  000 \to 001 \to 011 \to 111
+\end{equation}
+を考える。
+すると、
+\begin{equation}
+  \Qcircuit @C=1.0em @R=1.0em{
+  \lstick{} & \ctrlo{1} & \ctrlo{1} & \gate{\tilde{U}} & \ctrlo{1} & \ctrlo{1} & \rstick{} \qw \\
+  \lstick{} & \ctrlo{1} & \targ     & \ctrl{-1}        & \targ     & \ctrlo{1} & \rstick{} \qw \\
+  \lstick{} & \targ     & \ctrl{-1} & \ctrl{-1}        & \ctrl{-1} & \targ     & \rstick{} \qw \\
+ }
+\end{equation}
+このような回路になる。
+
+nビットで最大のハミング距離はnである。
+そのため、任意の$\ket{x}$と$\ket{y}$にのみ作用するTwo-levelユニタリ行列を作るために考えるグレイコードの列は最大$n$である。
+なので、最大$n-2$回のグレイコードの列の遷移を考えればよい。
+最大$n-2$回の遷移のあとに、$\tilde{U}$を作用させ、遷移を戻すために同じ$n-2$回の遷移をするため、
+任意のTwo-levelユニタリ行列を作るために、$2(n-2)+1 = 2n-3 = \mathcal{O}(n)$個の「$n-1$個のコントロールビットを持つゲート」が必要になる。
+これと、定理\ref{theorem:CNUdecomp}の右辺の回路を作るために$\mathcal{O}(n^2)$個の基本ゲートが必要になることを合わせると、
+nビットの任意のTwo-levelユニタリ行列を作るためには$\mathcal{O}(n^3)$個の基本ゲートが必要になる。
+また、補題\ref{lemma:Udecomp}で議論されたように、$2^n$次元のユニタリ行列は$\mathcal{O}(4^n)$個のTwo-levelユニタリ行列で表すことができるため、
+$2^n$次元の任意のユニタリ行列を基本ゲートで表すためには$\mathcal{O}(n^3 4^n)$個の基本ゲートが必要になる。
+このオーダーはナイーブに見積もったものであるため、実際は様々なことを考慮することでオーダーを減らすことができる。
