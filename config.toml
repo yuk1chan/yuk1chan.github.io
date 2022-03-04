@@ -1,5 +1,5 @@
 baseURL = 'https://yuk1chan.github.io/'
 languageCode = 'en-us'
-title = 'ゆきちゃん'
+title = 'ゆきちゃんメモ'
 theme = 'hugo-book'
 publishDir = 'docs'
