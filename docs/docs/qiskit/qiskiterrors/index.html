@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Qiskit Errors #  TwoQubitWeylDecomposition: failed to diagonalize M2. #  タイトルのエラーに遭遇した。
+ 2022/3/12 Qiskit 0.34.2 qiskit/quantum_info/synthesis/two_qubit_decompose.py  次の行列$U$を使った処理でTwoQubitWeylDecomposition: failed to diagonalize M2のエラーがでる。
+Issues
+ https://github.com/Qiskit/qiskit-terra/issues/4159 https://github.com/Qiskit/qiskit-terra/issues/7120  を見ても良い感じの対処法がなさそうなので、np.allclose()のatolの許容誤差を1e-12とかにして緩和するのが良さそうだけども、こういうことはできるだけしたくない。
+import numpy as np import scipy.linalg as la import cmath from qiskit.exceptions import QiskitError from qiskit.quantum_info.synthesis.weyl import transform_to_magic_basis   U = np.array([  [(0.3945282997653422 &#43; 0.49127685316744496j), (-0.10799362925849759 - 0.046262145472562424j), (-0.17866302937542566 - 0.4579595765217537j), (-0.3299855856919041 - 0.4885219806766785j)],  [(-0.10799362925849768 - 0.04626214547256243j), (0.8638710645400048 - 0.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="TwoQubitWeylDecomposition: failed to diagonalize M2" />
+<meta property="og:description" content="Qiskit Errors #  TwoQubitWeylDecomposition: failed to diagonalize M2. #  タイトルのエラーに遭遇した。
+ 2022/3/12 Qiskit 0.34.2 qiskit/quantum_info/synthesis/two_qubit_decompose.py  次の行列$U$を使った処理でTwoQubitWeylDecomposition: failed to diagonalize M2のエラーがでる。
+Issues
+ https://github.com/Qiskit/qiskit-terra/issues/4159 https://github.com/Qiskit/qiskit-terra/issues/7120  を見ても良い感じの対処法がなさそうなので、np.allclose()のatolの許容誤差を1e-12とかにして緩和するのが良さそうだけども、こういうことはできるだけしたくない。
+import numpy as np import scipy.linalg as la import cmath from qiskit.exceptions import QiskitError from qiskit.quantum_info.synthesis.weyl import transform_to_magic_basis   U = np.array([  [(0.3945282997653422 &#43; 0.49127685316744496j), (-0.10799362925849759 - 0.046262145472562424j), (-0.17866302937542566 - 0.4579595765217537j), (-0.3299855856919041 - 0.4885219806766785j)],  [(-0.10799362925849768 - 0.04626214547256243j), (0.8638710645400048 - 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuk1chan.github.io/docs/qiskit/qiskiterrors/" /><meta property="article:section" content="docs" />
+
+
+
+<title>TwoQubitWeylDecomposition: failed to diagonalize M2 | ゆきちゃんメモ</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.36acc88176167cd73c014f49f8a53e11e203ce47c852ea3584e66e5db0a00699.js" integrity="sha256-NqzIgXYWfNc8AU9J&#43;KU&#43;EeIDzkfIUuo1hOZuXbCgBpk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ゆきちゃんメモ</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-426c24f586a1a31f40b6adbe7793c4e5" class="toggle"  />
+    <label for="section-426c24f586a1a31f40b6adbe7793c4e5" class="flex justify-between">
+      <a href="/docs/math/" class="">数学</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9a8f440083a027473ac18cde2b962bb2" class="toggle" checked />
+    <label for="section-9a8f440083a027473ac18cde2b962bb2" class="flex justify-between">
+      <a href="/docs/qiskit/" class="">Qiskit</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/qiskit/qiskiterrors/" class=" active">TwoQubitWeylDecomposition: failed to diagonalize M2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/links/" class="">リンク集</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>TwoQubitWeylDecomposition: failed to diagonalize M2</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#twoqubitweyldecomposition-failed-to-diagonalize-m2">TwoQubitWeylDecomposition: failed to diagonalize M2.</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="qiskit-errors">
+  Qiskit Errors
+  <a class="anchor" href="#qiskit-errors">#</a>
+</h1>
+<h2 id="twoqubitweyldecomposition-failed-to-diagonalize-m2">
+  TwoQubitWeylDecomposition: failed to diagonalize M2.
+  <a class="anchor" href="#twoqubitweyldecomposition-failed-to-diagonalize-m2">#</a>
+</h2>
+<p>タイトルのエラーに遭遇した。</p>
+<ul>
+<li>2022/3/12</li>
+<li>Qiskit 0.34.2</li>
+<li>qiskit/quantum_info/synthesis/two_qubit_decompose.py</li>
+</ul>
+<p>次の行列$U$を使った処理で<strong>TwoQubitWeylDecomposition: failed to diagonalize M2</strong>のエラーがでる。</p>
+<p>Issues</p>
+<ul>
+<li><a href="https://github.com/Qiskit/qiskit-terra/issues/4159">https://github.com/Qiskit/qiskit-terra/issues/4159</a></li>
+<li><a href="https://github.com/Qiskit/qiskit-terra/issues/7120">https://github.com/Qiskit/qiskit-terra/issues/7120</a></li>
+</ul>
+<p>を見ても良い感じの対処法がなさそうなので、<code>np.allclose()</code>の<code>atol</code>の許容誤差を1e-12とかにして緩和するのが良さそうだけども、こういうことはできるだけしたくない。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> scipy.linalg <span style="color:#66d9ef">as</span> la
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cmath
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> qiskit.exceptions <span style="color:#f92672">import</span> QiskitError
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> qiskit.quantum_info.synthesis.weyl <span style="color:#f92672">import</span> transform_to_magic_basis
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>U <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([
+</span></span><span style="display:flex;"><span>    [(<span style="color:#ae81ff">0.3945282997653422</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.49127685316744496</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.10799362925849759</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.046262145472562424</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.17866302937542566</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.4579595765217537</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.3299855856919041</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.4885219806766785</span>j)],
+</span></span><span style="display:flex;"><span>    [(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.10799362925849768</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.04626214547256243</span>j), (<span style="color:#ae81ff">0.8638710645400048</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.35880630506234923</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.23218921544778265</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.07338827406700994</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.11904147245195221</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.19419955337169612</span>j)],
+</span></span><span style="display:flex;"><span>    [(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.17866302937542586</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.4579595765217535</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.2321892154477826</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.07338827406701008</span>j), (<span style="color:#ae81ff">0.017401577445396693</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.32313818065993927</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.17664002536172665</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.7504212686269761</span>j)],
+</span></span><span style="display:flex;"><span>    [(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.32998558569190406</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.4885219806766784</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.1190414724519524</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.19419955337169617</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.17664002536172668</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.7504212686269764</span>j), (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.02793005810069993</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.0738754480515572</span>j)]
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>detU <span style="color:#f92672">=</span> la<span style="color:#f92672">.</span>det(U)
+</span></span><span style="display:flex;"><span>global_phase <span style="color:#f92672">=</span> cmath<span style="color:#f92672">.</span>phase(detU) <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>Up <span style="color:#f92672">=</span> transform_to_magic_basis(U, reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>M2 <span style="color:#f92672">=</span> Up<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>dot(Up)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>state <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>default_rng(<span style="color:#ae81ff">2020</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    M2real <span style="color:#f92672">=</span> state<span style="color:#f92672">.</span>normal() <span style="color:#f92672">*</span> M2<span style="color:#f92672">.</span>real <span style="color:#f92672">+</span> state<span style="color:#f92672">.</span>normal() <span style="color:#f92672">*</span> M2<span style="color:#f92672">.</span>imag
+</span></span><span style="display:flex;"><span>    _, P <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>eigh(M2real)
+</span></span><span style="display:flex;"><span>    D <span style="color:#f92672">=</span> P<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>dot(M2)<span style="color:#f92672">.</span>dot(P)<span style="color:#f92672">.</span>diagonal()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>allclose(P<span style="color:#f92672">.</span>dot(np<span style="color:#f92672">.</span>diag(D))<span style="color:#f92672">.</span>dot(P<span style="color:#f92672">.</span>T), M2, rtol<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, atol<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0e-13</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">raise</span> QiskitError(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;TwoQubitWeylDecomposition: failed to diagonalize M2.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34; Please report this at https://github.com/Qiskit/qiskit-terra/issues/4159.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; Input: </span><span style="color:#e6db74">{</span>U<span style="color:#f92672">.</span>tolist()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><p>アルゴリズムはQiskitのソースコード<code>qiskit/quantum_info/synthesis/two_qubit_decompose.py</code>に書いてあるように、
+<a href="https://arxiv.org/abs/0806.4015">Constructive Quantum Shannon Decomposition from Cartan Involutions</a>の結果を用いている。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {delimiters: [
+              {left: "$$", right: "$$", display: true},
+              {left: "$", right: "$", display: false}]
+            });
+          });
+        </script>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#twoqubitweyldecomposition-failed-to-diagonalize-m2">TwoQubitWeylDecomposition: failed to diagonalize M2.</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
